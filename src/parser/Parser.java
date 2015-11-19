@@ -166,11 +166,14 @@ public class Parser {
 		Formula f = null;
 		// f = parse("∀x,y[P(x,y)]" + Formula.AND + "P(z)");
 		s = Formula.EXIST + "x, y[P(x, y)]" + Formula.IMPLIES + "¬(P(z)" + Formula.OR + Formula.FORALL + "x,y[P(x)])";
-//		s = "(P(z)" + Formula.OR + Formula.FORALL + "x,y[P(x)])";
+		// s = "(P(z)" + Formula.OR + Formula.FORALL + "x,y[P(x)])";
 		s = "∃x[P(x)∧∀x[Q(x)⇒¬P(x)]]";
 		s = "∀x[P (x) ⇔ (Q(x) ∧ ∃y[Q(y) ∧ R(y, x)])]";
 		System.out.println(s);
 		f = parse(s);
+		f = f.iffElimination();
+		f = f.impElimination();
+		f = f.pushNegation();
 		System.out.println(f.getClass());
 		System.out.println(f);
 	}

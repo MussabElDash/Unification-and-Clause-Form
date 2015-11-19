@@ -27,4 +27,19 @@ public class Exist extends Formula {
 		}
 		return res + "[" + formula.toString() + "]";
 	}
+
+	@Override
+	public Formula iffElimination() {
+		return new Exist(vars, formula.iffElimination());
+	}
+
+	@Override
+	public Formula impElimination() {
+		return new Exist(vars, formula.impElimination());
+	}
+
+	@Override
+	public Formula pushNegation() {
+		return new Exist(vars, formula.pushNegation());
+	}
 }

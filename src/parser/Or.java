@@ -27,4 +27,35 @@ public class Or extends Formula {
 		return res;
 	}
 
+	@Override
+	public Formula iffElimination() {
+		Formula[] forms = new Formula[formulas.length];
+		for (int i = 0; i < forms.length; i++) {
+			forms[i] = formulas[i].iffElimination();
+		}
+		return new Or(forms);
+	}
+
+	@Override
+	public Formula impElimination() {
+		Formula[] forms = new Formula[formulas.length];
+		for (int i = 0; i < forms.length; i++) {
+			forms[i] = formulas[i].impElimination();
+		}
+		return new Or(forms);
+	}
+
+	@Override
+	public Formula pushNegation() {
+		Formula[] forms = new Formula[formulas.length];
+		for (int i = 0; i < forms.length; i++) {
+//			if (formulas[i] instanceof Not) {
+//				System.out.println(formulas[i]);
+//				System.out.println(formulas[i].pushNegation());
+//			}
+			forms[i] = formulas[i].pushNegation();
+		}
+		return new Or(forms);
+	}
+
 }

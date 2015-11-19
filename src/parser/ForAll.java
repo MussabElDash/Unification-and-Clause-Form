@@ -27,4 +27,19 @@ public class ForAll extends Formula {
 		}
 		return res + "[" + formula.toString() + "]";
 	}
+
+	@Override
+	public Formula iffElimination() {
+		return new ForAll(vars, formula.iffElimination());
+	}
+
+	@Override
+	public Formula impElimination() {
+		return new ForAll(vars, formula.impElimination());
+	}
+
+	@Override
+	public Formula pushNegation() {
+		return new ForAll(vars, formula.pushNegation());
+	}
 }

@@ -13,13 +13,23 @@ public class Iff extends Formula {
 		return new Not(this);
 	}
 
-	public Formula convert() {
+	public Formula iffElimination() {
 		return new And(new Formula[] { new Implies(a, b), new Implies(b, a) });
 	}
 
 	@Override
 	public String toString() {
 		return bracketize(a) + " ⇔ " + bracketize(b);
+	}
+
+	@Override
+	public Formula impElimination() {
+		return this;
+	}
+
+	@Override
+	public Formula pushNegation() {
+		return this;
 	}
 
 }

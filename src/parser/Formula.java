@@ -18,4 +18,10 @@ public abstract class Formula {
 		}
 		return res;
 	}
+
+	public abstract Formula iffElimination();
+
+	public abstract Formula impElimination();
+	
+	public abstract Formula pushNegation();
 }

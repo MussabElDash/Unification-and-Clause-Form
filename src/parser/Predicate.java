@@ -125,4 +125,19 @@ public class Predicate extends Formula {
 		return string;
 	}
 
+	@Override
+	public Formula iffElimination() {
+		return this;
+	}
+
+	@Override
+	public Formula impElimination() {
+		return this;
+	}
+
+	@Override
+	public Formula pushNegation() {
+		return this;
+	}
+
 }

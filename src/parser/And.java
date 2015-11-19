@@ -27,4 +27,34 @@ public class And extends Formula {
 		return res;
 	}
 
+	@Override
+	public Formula iffElimination() {
+		Formula[] forms = new Formula[formulas.length];
+		for (int i = 0; i < forms.length; i++) {
+			forms[i] = formulas[i].iffElimination();
+		}
+		return new And(forms);
+	}
+
+	@Override
+	public Formula impElimination() {
+		Formula[] forms = new Formula[formulas.length];
+		for (int i = 0; i < forms.length; i++) {
+			forms[i] = formulas[i].impElimination();
+		}
+		return new And(forms);
+	}
+
+	@Override
+	public Formula pushNegation() {
+		Formula[] forms = new Formula[formulas.length];
+		for (int i = 0; i < forms.length; i++) {
+			// if (formulas[i] instanceof Not) {
+			// System.out.println(formulas[i].pushNegation());
+			// }
+			forms[i] = formulas[i].pushNegation();
+		}
+		return new And(forms);
+	}
+
 }

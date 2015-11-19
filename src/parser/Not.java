@@ -16,4 +16,19 @@ public class Not extends Formula {
 	public String toString() {
 		return "¬" + bracketize(formula);
 	}
+
+	@Override
+	public Formula iffElimination() {
+		return new Not(formula.iffElimination());
+	}
+
+	@Override
+	public Formula impElimination() {
+		return new Not(formula.impElimination());
+	}
+
+	@Override
+	public Formula pushNegation() {
+		return formula.negate();
+	}
 }

@@ -13,13 +13,23 @@ public class Implies extends Formula {
 		return new Not(this);
 	}
 
-	public Formula convert() {
-		return new Or(new Formula[] { a.negate(), b });
+	public Formula impElimination() {
+		return new Or(new Formula[] { new Not(a), b });
 	}
 
 	@Override
 	public String toString() {
 		return bracketize(a) + " ⇒ " + bracketize(b);
+	}
+
+	@Override
+	public Formula iffElimination() {
+		return this;
+	}
+
+	@Override
+	public Formula pushNegation() {
+		return this;
 	}
 
 }
