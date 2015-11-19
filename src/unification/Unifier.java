@@ -1,17 +1,20 @@
 package unification;
 
-import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashMap;
 
+import parser.Predicate;
+
 public class Unifier {
 	public static HashMap<String, String> getMGU(String a, String b) {
-		HashMap<String, Object> map = getMGU(listify(a), listify(b), new HashMap<String, Object>());
+		Object o1 = Predicate.listify(a);
+		Object o2 = Predicate.listify(b);
+		HashMap<String, Object> map = getMGU(o1, o2, new HashMap<String, Object>());
 		if (map == null)
 			return null;
 		HashMap<String, String> res = new HashMap<String, String>();
 		for (String s : map.keySet()) {
-			res.put(s, arraysToString(map.get(s)));
+			res.put(s, Predicate.arraysToString(map.get(s)));
 		}
 		return res;
 	}
@@ -29,27 +32,10 @@ public class Unifier {
 			return null;
 		Object[] arr1 = (Object[]) o1;
 		Object[] arr2 = (Object[]) o2;
-		// System.out.println(Arrays.deepToString(arr1));
-		// System.out.println(Arrays.deepToString(arr2));
-		// System.out.println(map);
-		// System.out.println("==================================");
 		if (arr1.length != arr2.length)
 			return null;
-		return getMGU(rest(arr1), rest(arr2), getMGU(first(arr1), first(arr2), map));
-	}
-
-	private static Object first(Object[] o) {
-		return o[0];
-	}
-
-	private static Object[] rest(Object[] o) {
-		if (o.length < 2)
-			return new Object[] {};
-		Object[] res = new Object[o.length - 1];
-		for (int i = 1; i < o.length; i++) {
-			res[i - 1] = o[i];
-		}
-		return res;
+		return getMGU(Predicate.rest(arr1), Predicate.rest(arr2),
+				getMGU(Predicate.first(arr1), Predicate.first(arr2), map));
 	}
 
 	private static boolean eq(Object a, Object b) {
@@ -117,96 +103,6 @@ public class Unifier {
 				return true;
 		}
 		return false;
-	}
-
-	private static ArrayList<Object> listify1(String sentence) {
-		sentence = sentence.trim();
-		ArrayList<Object> res = new ArrayList<Object>();
-		String substring = "";
-		int i;
-		for (i = 0; i < sentence.length(); i++) {
-			char c = sentence.charAt(i);
-			if (c == '(') {
-				break;
-			} else if (c == ',') {
-				substring = sentence.substring(0, i);
-				res = listify1(sentence.substring(i + 1));
-				if (!substring.isEmpty()) {
-					res.add(0, substring);
-				}
-				return res;
-			}
-		}
-
-		if (i == sentence.length()) {
-			res.add(sentence);
-			return res;
-		}
-
-		int j = i + 1;
-		for (int count = 1; j < sentence.length() && count != 0; j++) {
-			char c = sentence.charAt(j);
-			if (c == '(') {
-				count++;
-			} else if (c == ')') {
-				count--;
-			}
-		}
-
-		substring = sentence.substring(j);
-		substring = substring.trim();
-		if (!substring.isEmpty())
-			res = listify1(substring);
-
-		ArrayList<Object> temp = new ArrayList<Object>();
-		substring = sentence.substring(i + 1, j - 1);
-		substring = substring.trim();
-		if (!substring.isEmpty())
-			temp = listify1(substring);
-
-		substring = sentence.substring(0, i);
-		substring = substring.trim();
-		if (!substring.isEmpty())
-			temp.add(0, substring);
-		if (!temp.isEmpty())
-			res.add(0, temp);
-		return res;
-
-	}
-
-	private static Object[] listify(String sentence) {
-		return (Object[]) (((Object[]) ListToArray(listify1(sentence)))[0]);
-	}
-
-	@SuppressWarnings("unchecked")
-	private static Object ListToArray(Object l) {
-		if (l instanceof String)
-			return l;
-		ArrayList<Object> li = (ArrayList<Object>) l;
-		Object[] res = new Object[li.size()];
-		for (int i = 0; i < li.size(); i++) {
-			res[i] = ListToArray(li.get(i));
-		}
-		return res;
-	}
-
-	private static String arraysToString(Object o) {
-		if (o instanceof String)
-			return (String) o;
-		Object[] arr = (Object[]) o;
-		if (arr.length == 0)
-			return "";
-		String res = (String) arr[0];
-		res += "(" + arraysToString1(rest(arr));
-		return res + ")";
-	}
-
-	private static String arraysToString1(Object[] a) {
-		String res = arraysToString(a[0]);
-		for (int i = 1; i < a.length; i++) {
-			res += "," + arraysToString(a[i]);
-		}
-		return res;
 	}
 
 	public static void main(String[] args) {
