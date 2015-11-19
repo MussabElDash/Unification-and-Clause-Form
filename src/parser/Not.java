@@ -1,5 +1,7 @@
 package parser;
 
+import java.util.Set;
+
 public class Not extends Formula {
 	private Formula formula;
 
@@ -30,5 +32,15 @@ public class Not extends Formula {
 	@Override
 	public Formula pushNegation() {
 		return formula.negate();
+	}
+
+	@Override
+	public Set<String> standardize(Set<String> vars) {
+		return formula.standardize(vars);
+	}
+
+	@Override
+	public Formula rename(String s) {
+		return new Not(formula.rename(s));
 	}
 }

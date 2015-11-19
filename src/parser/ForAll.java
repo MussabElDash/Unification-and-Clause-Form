@@ -1,5 +1,8 @@
 package parser;
 
+import java.util.HashSet;
+import java.util.Set;
+
 public class ForAll extends Formula {
 	private String[] vars;
 	private Formula formula;
@@ -41,5 +44,30 @@ public class ForAll extends Formula {
 	@Override
 	public Formula pushNegation() {
 		return new ForAll(vars, formula.pushNegation());
+	}
+
+	@Override
+	public Set<String> standardize(Set<String> vars) {
+		HashSet<String> res = new HashSet<String>();
+		for (String s : this.vars) {
+			res.add(s);
+		}
+		// formula.standardize(new HashSet<String>())
+		res.addAll(formula.standardize(new HashSet<String>()));
+		return res;
+	}
+
+	@Override
+	public Formula rename(String var) {
+		String[] newVars = new String[vars.length];
+		for (int i = 0; i < newVars.length; i++) {
+			String s = vars[i];
+			if (s.equals(var)) {
+				newVars[i] = s + "'";
+			} else {
+				newVars[i] = s;
+			}
+		}
+		return new ForAll(newVars, formula.rename(var));
 	}
 }

@@ -1,6 +1,7 @@
 package parser;
 
 import java.util.ArrayList;
+import java.util.HashSet;
 
 public class Parser {
 	public static Formula parse(String formula) {
@@ -165,16 +166,42 @@ public class Parser {
 		String s;
 		Formula f = null;
 		// f = parse("∀x,y[P(x,y)]" + Formula.AND + "P(z)");
-		s = Formula.EXIST + "x, y[P(x, y)]" + Formula.IMPLIES + "¬(P(z)" + Formula.OR + Formula.FORALL + "x,y[P(x)])";
-		// s = "(P(z)" + Formula.OR + Formula.FORALL + "x,y[P(x)])";
-		s = "∃x[P(x)∧∀x[Q(x)⇒¬P(x)]]";
-		s = "∀x[P (x) ⇔ (Q(x) ∧ ∃y[Q(y) ∧ R(y, x)])]";
+//		s = Formula.EXIST + "x, y[P(x, y)]" + Formula.IMPLIES + "¬(P(z)" + Formula.OR + Formula.FORALL
+//				+ "x,y[P(x,y)∧P(y)])";
+//		 s = "(P(z)" + Formula.OR + Formula.FORALL + "x,y[P(x)])";
+//		 s = "∃x[P(x)]∧∀x[Q(x)⇒¬P(x)]"; // Corrected From Project
+//		 s = "∃x[P(x)∧∀x[Q(x)⇒¬P(x)]]"; // Project
+		 s = "∀x[P (x) ⇔ (Q(x) ∧ ∃y[Q(y) ∧ R(y, x)])]"; // Project
+//		 s = "∀x[P (x) ⇔ (Q(x) ∧ ∃y[Q(y) ∧ R(y, x)])] ∧ ∃z[P(z) ∧ ∀x[Q(x) ∧ ∃y[Q(y) ∧ R(y, x)]]]";
+//		 s = "∀x[Q(x) ∧ ∃y[Q(y) ∧ R(y, x)]] ∧ ∃z[P(z) ∧ ∀x[Q(x) ∧ ∃y[Q(y) ∧ R(y, x)]]]";
+		System.out.println("Original String");
 		System.out.println(s);
+		System.out.println("=========================");
+
 		f = parse(s);
-		f = f.iffElimination();
-		f = f.impElimination();
-		f = f.pushNegation();
-		System.out.println(f.getClass());
+		System.out.println("Parsed Formula");
 		System.out.println(f);
+		System.out.println("=========================");
+
+		f = f.iffElimination();
+		System.out.println("Elimenated ⇔");
+		System.out.println(f);
+		System.out.println("=========================");
+
+		f = f.impElimination();
+		System.out.println("Elimenated ⇒");
+		System.out.println(f);
+		System.out.println("=========================");
+
+		f = f.pushNegation();
+		System.out.println("Pushed Negation");
+		System.out.println(f);
+		System.out.println("=========================");
+		
+		f.standardize(new HashSet<String>());
+		System.out.println("Standardized");
+		System.out.println(f);
+		System.out.println("=========================");
+		System.out.println(f.getClass());
 	}
 }

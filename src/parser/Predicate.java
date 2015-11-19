@@ -1,6 +1,8 @@
 package parser;
 
 import java.util.ArrayList;
+import java.util.HashSet;
+import java.util.Set;
 
 public class Predicate extends Formula {
 	private String string;
@@ -138,6 +140,19 @@ public class Predicate extends Formula {
 	@Override
 	public Formula pushNegation() {
 		return this;
+	}
+
+	@Override
+	public Set<String> standardize(Set<String> vars) {
+		return new HashSet<String>();
+	}
+
+	@Override
+	public Formula rename(String st) {
+		String s = string;
+		s = s.replaceAll(st + "\\)", st + "')");
+		s = s.replaceAll(st + ",", st + "',");
+		return new Predicate(s);
 	}
 
 }

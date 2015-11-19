@@ -1,5 +1,7 @@
 package parser;
 
+import java.util.Set;
+
 public abstract class Formula {
 	public static char AND = '∧', OR = '∨', NOT = '¬';
 	public static char FORALL = '∀', EXIST = '∃', IFF = '⇔', IMPLIES = '⇒';
@@ -22,6 +24,10 @@ public abstract class Formula {
 	public abstract Formula iffElimination();
 
 	public abstract Formula impElimination();
-	
+
 	public abstract Formula pushNegation();
+
+	public abstract Set<String> standardize(Set<String> vars);
+
+	public abstract Formula rename(String s);
 }

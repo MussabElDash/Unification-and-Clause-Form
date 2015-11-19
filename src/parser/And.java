@@ -1,5 +1,8 @@
 package parser;
 
+import java.util.HashSet;
+import java.util.Set;
+
 public class And extends Formula {
 	private Formula[] formulas;
 
@@ -53,6 +56,29 @@ public class And extends Formula {
 			// System.out.println(formulas[i].pushNegation());
 			// }
 			forms[i] = formulas[i].pushNegation();
+		}
+		return new And(forms);
+	}
+
+	@Override
+	public Set<String> standardize(Set<String> vars) {
+		HashSet<String> res = new HashSet<String>(vars);
+		for (int i = 0; i < formulas.length; i++) {
+			Formula f = formulas[i];
+			for (String s : res)
+				f = f.rename(s);
+			Set<String> temp = f.standardize(new HashSet<String>());
+			res.addAll(temp);
+			formulas[i] = f;
+		}
+		return res;
+	}
+
+	@Override
+	public Formula rename(String s) {
+		Formula[] forms = new Formula[formulas.length];
+		for (int i = 0; i < forms.length; i++) {
+			forms[i] = formulas[i].rename(s);
 		}
 		return new And(forms);
 	}

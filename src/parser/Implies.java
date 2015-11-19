@@ -1,5 +1,8 @@
 package parser;
 
+import java.util.HashSet;
+import java.util.Set;
+
 public class Implies extends Formula {
 	private Formula a, b;
 
@@ -29,6 +32,16 @@ public class Implies extends Formula {
 
 	@Override
 	public Formula pushNegation() {
+		return this;
+	}
+
+	@Override
+	public Set<String> standardize(Set<String> vars) {
+		return new HashSet<String>();
+	}
+
+	@Override
+	public Formula rename(String s) {
 		return this;
 	}
 
