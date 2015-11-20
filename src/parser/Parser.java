@@ -163,18 +163,17 @@ public class Parser {
 	}
 
 	public static void main(String[] args) {
-		String s;
+		String s = "";
 		Formula f = null;
 		// f = parse("∀x,y[P(x,y)]" + Formula.AND + "P(z)");
-//		s = Formula.EXIST + "x, y[P(x, y)]" + Formula.IMPLIES + "¬(P(z)" + Formula.OR + Formula.FORALL
-//				+ "x,y[P(x,y)∧P(y)])";
+//		s = Formula.EXIST + "x, y[P(x, y)]" + Formula.IMPLIES + "¬(P(z)" + Formula.OR + Formula.FORALL + "x,y[P(x,y)∧P(y)])";
 //		 s = "(P(z)" + Formula.OR + Formula.FORALL + "x,y[P(x)])";
 //		 s = "∃x[P(x)]∧∀x[Q(x)⇒¬P(x)]"; // Corrected From Project
 //		 s = "∃x[P(x)∧∀x[Q(x)⇒¬P(x)]]"; // Project
-		 s = "∀x[P (x) ⇔ (Q(x) ∧ ∃y[Q(y) ∧ R(y, x)])]"; // Project
+//		 s = "∀x[P (x) ⇔ (Q(x) ∧ ∃y[Q(y) ∧ R(y, x)])]"; // Project
 //		 s = "∀x[P (x) ⇔ (Q(x) ∧ ∃y[Q(y) ∧ R(y, x)])] ∧ ∃z[P(z) ∧ ∀x[Q(x) ∧ ∃y[Q(y) ∧ R(y, x)]]]";
 //		 s = "∀x[Q(x) ∧ ∃y[Q(y) ∧ R(y, x)]] ∧ ∃z[P(z) ∧ ∀x[Q(x) ∧ ∃y[Q(y) ∧ R(y, x)]]]";
-		System.out.println("Original String");
+//		System.out.println("Original String");
 		System.out.println(s);
 		System.out.println("=========================");
 

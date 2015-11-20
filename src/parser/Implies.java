@@ -41,7 +41,7 @@ public class Implies extends Formula {
 	}
 
 	@Override
-	public Formula rename(String s) {
+	public Formula rename(String s, boolean toQuantifier) {
 		return this;
 	}
 

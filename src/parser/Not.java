@@ -40,7 +40,7 @@ public class Not extends Formula {
 	}
 
 	@Override
-	public Formula rename(String s) {
-		return new Not(formula.rename(s));
+	public Formula rename(String s, boolean toQuantifier) {
+		return new Not(formula.rename(s, toQuantifier));
 	}
 }

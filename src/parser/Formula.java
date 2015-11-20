@@ -29,5 +29,5 @@ public abstract class Formula {
 
 	public abstract Set<String> standardize(Set<String> vars);
 
-	public abstract Formula rename(String s);
+	public abstract Formula rename(String s, boolean toQuantifier);
 }

@@ -148,7 +148,7 @@ public class Predicate extends Formula {
 	}
 
 	@Override
-	public Formula rename(String st) {
+	public Formula rename(String st, boolean toQuantifier) {
 		String s = string;
 		s = s.replaceAll(st + "\\)", st + "')");
 		s = s.replaceAll(st + ",", st + "',");

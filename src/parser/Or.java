@@ -67,7 +67,7 @@ public class Or extends Formula {
 		for (int i = 0; i < formulas.length; i++) {
 			Formula f = formulas[i];
 			for (String s : res) {
-				f = f.rename(s);
+				f = f.rename(s, false);
 			}
 			Set<String> temp = f.standardize(new HashSet<String>());
 			res.addAll(temp);
@@ -77,10 +77,10 @@ public class Or extends Formula {
 	}
 
 	@Override
-	public Formula rename(String s) {
+	public Formula rename(String s, boolean toQuantifier) {
 		Formula[] forms = new Formula[formulas.length];
 		for (int i = 0; i < forms.length; i++) {
-			forms[i] = formulas[i].rename(s);
+			forms[i] = formulas[i].rename(s, toQuantifier);
 		}
 		return new Or(forms);
 	}

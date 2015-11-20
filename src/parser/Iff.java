@@ -41,7 +41,7 @@ public class Iff extends Formula {
 	}
 
 	@Override
-	public Formula rename(String s) {
+	public Formula rename(String s, boolean toQuantifier) {
 		return this;
 	}
 

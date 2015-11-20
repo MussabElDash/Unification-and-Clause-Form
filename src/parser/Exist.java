@@ -52,13 +52,20 @@ public class Exist extends Formula {
 		for (String s : this.vars) {
 			res.add(s);
 		}
-		// formula.standardize(new HashSet<String>())
-		res.addAll(formula.standardize(new HashSet<String>()));
+		Set<String> temp;
+		temp = formula.standardize(new HashSet<String>());
+		// temp = formula.standardize(res);
+		for (String var : temp) {
+			if (res.contains(var)) {
+				this.vars = renameVar(var);
+				formula = formula.rename(var, true);
+			}
+		}
+		res.addAll(temp);
 		return res;
 	}
 
-	@Override
-	public Formula rename(String var) {
+	private String[] renameVar(String var) {
 		String[] newVars = new String[vars.length];
 		for (int i = 0; i < newVars.length; i++) {
 			String s = vars[i];
@@ -68,6 +75,14 @@ public class Exist extends Formula {
 				newVars[i] = s;
 			}
 		}
-		return new Exist(newVars, formula.rename(var));
+		return newVars;
+	}
+
+	@Override
+	public Formula rename(String var, boolean toQuantifier) {
+		if (toQuantifier)
+			return this;
+		String[] newVars = renameVar(var);
+		return new Exist(newVars, formula.rename(var, false));
 	}
 }
