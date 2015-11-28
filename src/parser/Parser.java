@@ -4,22 +4,22 @@ import java.util.ArrayList;
 import java.util.HashSet;
 
 public class Parser {
-	public static Formula parse(String formula) {
+	public static Sentence parse(String formula) {
 		formula = formula.replaceAll(" ", "");
 		int i, j, count = 0;
 		char connector = 0;
 		// System.out.println(formula);
-		ArrayList<Formula> formulas = new ArrayList<Formula>();
+		ArrayList<Sentence> formulas = new ArrayList<Sentence>();
 		for (i = 0; i < formula.length(); i++) {
 			char c = formula.charAt(i);
 			// System.out.println(c);
-			if (c == Formula.FORALL) {
+			if (c == Sentence.FORALL) {
 				info infos = forAll(i, formula);
 				if (i == 0 && infos.j == formula.length())
 					return infos.formula;
 				formulas.add(infos.formula);
 				i = infos.j - 1;
-			} else if (c == Formula.EXIST) {
+			} else if (c == Sentence.EXIST) {
 				info infos = exist(i, formula);
 				if (i == 0 && infos.j == formula.length())
 					return infos.formula;
@@ -53,35 +53,35 @@ public class Parser {
 					return parse(formula.substring(i + 1, j - 1));
 				formulas.add(parse(formula.substring(i + 1, j - 1)));
 				i = j - 1;
-			} else if (c == Formula.NOT) {
+			} else if (c == Sentence.NOT) {
 				j = getNotNextIndex(i, formula);
 				String substring = formula.substring(i + 1, j);
 				if (i == 0 && j == formula.length())
 					return new Not(parse(substring));
 				formulas.add(new Not(parse(substring)));
 				i = j;
-			} else if (c == Formula.AND) {
-				connector = Formula.AND;
-			} else if (c == Formula.OR) {
-				connector = Formula.OR;
-			} else if (c == Formula.IMPLIES) {
-				connector = Formula.IMPLIES;
+			} else if (c == Sentence.AND) {
+				connector = Sentence.AND;
+			} else if (c == Sentence.OR) {
+				connector = Sentence.OR;
+			} else if (c == Sentence.IMPLIES) {
+				connector = Sentence.IMPLIES;
 				formulas.add(parse(formula.substring(i + 1)));
 				break;
-			} else if (c == Formula.IFF) {
-				connector = Formula.IFF;
+			} else if (c == Sentence.IFF) {
+				connector = Sentence.IFF;
 				formulas.add(parse(formula.substring(i + 1)));
 				break;
 			}
 		}
-		Formula[] forms = formulas.toArray(new Formula[formulas.size()]);
-		if (connector == Formula.AND)
+		Sentence[] forms = formulas.toArray(new Sentence[formulas.size()]);
+		if (connector == Sentence.AND)
 			return new And(forms);
-		else if (connector == Formula.OR) {
+		else if (connector == Sentence.OR) {
 			return new Or(forms);
-		} else if (connector == Formula.IMPLIES)
+		} else if (connector == Sentence.IMPLIES)
 			return new Implies(forms[0], forms[1]);
-		else if (connector == Formula.IFF)
+		else if (connector == Sentence.IFF)
 			return new Iff(forms[0], forms[1]);
 		// System.out.println(formula);
 		return new Predicate(formula);
@@ -89,7 +89,7 @@ public class Parser {
 
 	private static int getNotNextIndex(int i, String formula) {
 		char c = formula.charAt(++i);
-		if (c == Formula.EXIST || c == Formula.FORALL) {
+		if (c == Sentence.EXIST || c == Sentence.FORALL) {
 			int count = 1;
 			for (; i < formula.length(); i++)
 				if (formula.charAt(i) == '[')
@@ -159,12 +159,12 @@ public class Parser {
 		String substring;
 		String[] vars;
 		int j;
-		Formula formula;
+		Sentence formula;
 	}
 
 	public static void main(String[] args) {
 		String s = "";
-		Formula f = null;
+		Sentence f = null;
 		// f = parse("∀x,y[P(x,y)]" + Formula.AND + "P(z)");
 //		s = Formula.EXIST + "x, y[P(x, y)]" + Formula.IMPLIES + "¬(P(z)" + Formula.OR + Formula.FORALL + "x,y[P(x,y)∧P(y)])";
 //		 s = "(P(z)" + Formula.OR + Formula.FORALL + "x,y[P(x)])";

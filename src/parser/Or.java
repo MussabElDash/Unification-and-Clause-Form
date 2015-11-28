@@ -3,16 +3,16 @@ package parser;
 import java.util.HashSet;
 import java.util.Set;
 
-public class Or extends Formula {
-	private Formula[] formulas;
+public class Or extends Sentence {
+	private Sentence[] formulas;
 
-	public Or(Formula[] formulas) {
+	public Or(Sentence[] formulas) {
 		this.formulas = formulas;
 	}
 
 	@Override
-	public Formula negate() {
-		Formula[] forms = new Formula[formulas.length];
+	public Sentence negate() {
+		Sentence[] forms = new Sentence[formulas.length];
 		for (int i = 0; i < forms.length; i++) {
 			forms[i] = formulas[i].negate();
 		}
@@ -31,8 +31,8 @@ public class Or extends Formula {
 	}
 
 	@Override
-	public Formula iffElimination() {
-		Formula[] forms = new Formula[formulas.length];
+	public Sentence iffElimination() {
+		Sentence[] forms = new Sentence[formulas.length];
 		for (int i = 0; i < forms.length; i++) {
 			forms[i] = formulas[i].iffElimination();
 		}
@@ -40,8 +40,8 @@ public class Or extends Formula {
 	}
 
 	@Override
-	public Formula impElimination() {
-		Formula[] forms = new Formula[formulas.length];
+	public Sentence impElimination() {
+		Sentence[] forms = new Sentence[formulas.length];
 		for (int i = 0; i < forms.length; i++) {
 			forms[i] = formulas[i].impElimination();
 		}
@@ -49,8 +49,8 @@ public class Or extends Formula {
 	}
 
 	@Override
-	public Formula pushNegation() {
-		Formula[] forms = new Formula[formulas.length];
+	public Sentence pushNegation() {
+		Sentence[] forms = new Sentence[formulas.length];
 		for (int i = 0; i < forms.length; i++) {
 			// if (formulas[i] instanceof Not) {
 			// System.out.println(formulas[i]);
@@ -65,7 +65,7 @@ public class Or extends Formula {
 	public Set<String> standardize(Set<String> vars) {
 		HashSet<String> res = new HashSet<String>(vars);
 		for (int i = 0; i < formulas.length; i++) {
-			Formula f = formulas[i];
+			Sentence f = formulas[i];
 			for (String s : res) {
 				f = f.rename(s, false);
 			}
@@ -77,8 +77,8 @@ public class Or extends Formula {
 	}
 
 	@Override
-	public Formula rename(String s, boolean toQuantifier) {
-		Formula[] forms = new Formula[formulas.length];
+	public Sentence rename(String s, boolean toQuantifier) {
+		Sentence[] forms = new Sentence[formulas.length];
 		for (int i = 0; i < forms.length; i++) {
 			forms[i] = formulas[i].rename(s, toQuantifier);
 		}

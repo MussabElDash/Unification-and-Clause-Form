@@ -2,16 +2,16 @@ package parser;
 
 import java.util.Set;
 
-public abstract class Formula {
+public abstract class Sentence {
 	public static char AND = '∧', OR = '∨', NOT = '¬';
 	public static char FORALL = '∀', EXIST = '∃', IFF = '⇔', IMPLIES = '⇒';
 
-	public abstract Formula negate();
+	public abstract Sentence negate();
 
 	@Override
 	abstract public String toString();
 
-	public static String bracketize(Formula a) {
+	public static String bracketize(Sentence a) {
 		String res;
 		if (a instanceof Predicate || a instanceof Not || a instanceof Exist || a instanceof ForAll)
 			res = a.toString();
@@ -21,13 +21,13 @@ public abstract class Formula {
 		return res;
 	}
 
-	public abstract Formula iffElimination();
+	public abstract Sentence iffElimination();
 
-	public abstract Formula impElimination();
+	public abstract Sentence impElimination();
 
-	public abstract Formula pushNegation();
+	public abstract Sentence pushNegation();
 
 	public abstract Set<String> standardize(Set<String> vars);
 
-	public abstract Formula rename(String s, boolean toQuantifier);
+	public abstract Sentence rename(String s, boolean toQuantifier);
 }

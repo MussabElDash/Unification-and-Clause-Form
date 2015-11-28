@@ -2,15 +2,15 @@ package parser;
 
 import java.util.Set;
 
-public class Not extends Formula {
-	private Formula formula;
+public class Not extends Sentence {
+	private Sentence formula;
 
-	public Not(Formula formula) {
+	public Not(Sentence formula) {
 		this.formula = formula;
 	}
 
 	@Override
-	public Formula negate() {
+	public Sentence negate() {
 		return formula;
 	}
 
@@ -20,17 +20,17 @@ public class Not extends Formula {
 	}
 
 	@Override
-	public Formula iffElimination() {
+	public Sentence iffElimination() {
 		return new Not(formula.iffElimination());
 	}
 
 	@Override
-	public Formula impElimination() {
+	public Sentence impElimination() {
 		return new Not(formula.impElimination());
 	}
 
 	@Override
-	public Formula pushNegation() {
+	public Sentence pushNegation() {
 		return formula.negate();
 	}
 
@@ -40,7 +40,7 @@ public class Not extends Formula {
 	}
 
 	@Override
-	public Formula rename(String s, boolean toQuantifier) {
+	public Sentence rename(String s, boolean toQuantifier) {
 		return new Not(formula.rename(s, toQuantifier));
 	}
 }

@@ -3,21 +3,21 @@ package parser;
 import java.util.HashSet;
 import java.util.Set;
 
-public class Implies extends Formula {
-	private Formula a, b;
+public class Implies extends Sentence {
+	private Sentence a, b;
 
-	public Implies(Formula a, Formula b) {
+	public Implies(Sentence a, Sentence b) {
 		this.a = a;
 		this.b = b;
 	}
 
 	@Override
-	public Formula negate() {
+	public Sentence negate() {
 		return new Not(this);
 	}
 
-	public Formula impElimination() {
-		return new Or(new Formula[] { new Not(a), b });
+	public Sentence impElimination() {
+		return new Or(new Sentence[] { new Not(a), b });
 	}
 
 	@Override
@@ -26,12 +26,12 @@ public class Implies extends Formula {
 	}
 
 	@Override
-	public Formula iffElimination() {
+	public Sentence iffElimination() {
 		return this;
 	}
 
 	@Override
-	public Formula pushNegation() {
+	public Sentence pushNegation() {
 		return this;
 	}
 
@@ -41,7 +41,7 @@ public class Implies extends Formula {
 	}
 
 	@Override
-	public Formula rename(String s, boolean toQuantifier) {
+	public Sentence rename(String s, boolean toQuantifier) {
 		return this;
 	}
 

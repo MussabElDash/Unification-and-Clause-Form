@@ -3,22 +3,22 @@ package parser;
 import java.util.HashSet;
 import java.util.Set;
 
-public class Exist extends Formula {
+public class Exist extends Sentence {
 	private String[] vars;
-	private Formula formula;
+	private Sentence formula;
 
-	public Exist(String[] vars, Formula formula) {
+	public Exist(String[] vars, Sentence formula) {
 		this.formula = formula;
 		this.vars = vars;
 	}
 
-	public Exist(String var, Formula formula) {
+	public Exist(String var, Sentence formula) {
 		this.formula = formula;
 		this.vars = var.split(",");
 	}
 
 	@Override
-	public Formula negate() {
+	public Sentence negate() {
 		return new ForAll(vars, formula.negate());
 	}
 
@@ -32,17 +32,17 @@ public class Exist extends Formula {
 	}
 
 	@Override
-	public Formula iffElimination() {
+	public Sentence iffElimination() {
 		return new Exist(vars, formula.iffElimination());
 	}
 
 	@Override
-	public Formula impElimination() {
+	public Sentence impElimination() {
 		return new Exist(vars, formula.impElimination());
 	}
 
 	@Override
-	public Formula pushNegation() {
+	public Sentence pushNegation() {
 		return new Exist(vars, formula.pushNegation());
 	}
 
@@ -79,7 +79,7 @@ public class Exist extends Formula {
 	}
 
 	@Override
-	public Formula rename(String var, boolean toQuantifier) {
+	public Sentence rename(String var, boolean toQuantifier) {
 		if (toQuantifier)
 			return this;
 		String[] newVars = renameVar(var);

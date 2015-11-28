@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.Set;
 
-public class Predicate extends Formula {
+public class Predicate extends Sentence {
 	private String string;
 
 	public Predicate(String s) {
@@ -12,7 +12,7 @@ public class Predicate extends Formula {
 	}
 
 	@Override
-	public Formula negate() {
+	public Sentence negate() {
 		return new Not(this);
 	}
 
@@ -128,17 +128,17 @@ public class Predicate extends Formula {
 	}
 
 	@Override
-	public Formula iffElimination() {
+	public Sentence iffElimination() {
 		return this;
 	}
 
 	@Override
-	public Formula impElimination() {
+	public Sentence impElimination() {
 		return this;
 	}
 
 	@Override
-	public Formula pushNegation() {
+	public Sentence pushNegation() {
 		return this;
 	}
 
@@ -148,7 +148,7 @@ public class Predicate extends Formula {
 	}
 
 	@Override
-	public Formula rename(String st, boolean toQuantifier) {
+	public Sentence rename(String st, boolean toQuantifier) {
 		String s = string;
 		s = s.replaceAll(st + "\\)", st + "')");
 		s = s.replaceAll(st + ",", st + "',");
