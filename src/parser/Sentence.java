@@ -30,4 +30,13 @@ public abstract class Sentence {
 	public abstract Set<String> standardize(Set<String> vars);
 
 	public abstract Sentence rename(String s, boolean toQuantifier);
+	
+	public Sentence distribute() {
+		return this;
+	}
+
+	public Sentence[] getFormulas() {
+		// TODO Auto-generated method stub
+		return null;
+	}
 }

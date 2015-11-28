@@ -85,4 +85,35 @@ public class Or extends Sentence {
 		return new Or(forms);
 	}
 
+	@Override
+	public Sentence distribute() {
+		Sentence a = this.formulas[0];
+		Sentence b = this.formulas[1];
+		if ((a instanceof Predicate && b instanceof Predicate)
+				|| (a instanceof Or && b instanceof Or)
+				|| (a instanceof Or && b instanceof Predicate)) {
+			return this;
+		} else if (a instanceof Or) {
+			Sentence b1 = b.getFormulas()[0];
+			Sentence b2 = b.getFormulas()[1];
+			return new And(
+					new Sentence[] {
+							new Or(new Sentence[] { a.distribute(),
+									b1.distribute() }),
+							new Or(new Sentence[] { a.distribute(),
+									b2.distribute() }) });
+		} else if (b instanceof Predicate) {
+			Sentence a1 = a.getFormulas()[0];
+			Sentence a2 = a.getFormulas()[1];
+			return new And(
+					new Sentence[] {
+							new Or(new Sentence[] { a1.distribute(),
+									b.distribute() }),
+							new Or(new Sentence[] { a2.distribute(),
+									b.distribute() }) });
+		}
+		System.out.println(">>> Distribution Error!");
+		return null;
+	}
+
 }
