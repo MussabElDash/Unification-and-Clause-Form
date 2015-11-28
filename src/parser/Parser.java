@@ -77,9 +77,9 @@ public class Parser {
 		}
 		Sentence[] forms = formulas.toArray(new Sentence[formulas.size()]);
 		if (connector == Sentence.AND)
-			return new And(forms);
+			return And.getFormula(0, forms);
 		else if (connector == Sentence.OR) {
-			return new Or(forms);
+			return Or.getFormula(0, forms);
 		} else if (connector == Sentence.IMPLIES)
 			return new Implies(forms[0], forms[1]);
 		else if (connector == Sentence.IFF)
@@ -166,15 +166,19 @@ public class Parser {
 	public static void main(String[] args) {
 		String s = "";
 		Sentence f = null;
+		// s = "P (x) ∧ Q(x) ∧ Q(y) ∧ R(y, x)";
 		// f = parse("∀x,y[P(x,y)]" + Formula.AND + "P(z)");
-//		s = Sentence.EXIST + "x, y[P(x, y)]" + Sentence.IMPLIES + "¬(P(z)" + Sentence.OR + Sentence.FORALL + "x,y[P(x,y)∧P(y)])";
-//		 s = "(P(z)" + Sentence.OR + Sentence.FORALL + "x,y[P(x)])";
-//		 s = "∃x[P(x)]∧∀x[Q(x)⇒¬P(x)]"; // Corrected From Project
-//		 s = "∃x[P(x)∧∀x[Q(x)⇒¬P(x)]]"; // Project
-		 s = "∀x[P (x) ∧ (Q(x) ∧ ∃y[Q(y) ∧ R(y, x)])]"; // Project
-//		 s = "∀x[P (x) ⇔ (Q(x) ∧ ∃y[Q(y) ∧ R(y, x)])] ∧ ∃z[P(z) ∧ ∀x[Q(x) ∧ ∃y[Q(y) ∧ R(y, x)]]]";
-//		 s = "∀x[Q(x) ∧ ∃y[Q(y) ∧ R(y, x)]] ∧ ∃z[P(z) ∧ ∀x[Q(x) ∧ ∃y[Q(y) ∧ R(y, x)]]]";
-//		System.out.println("Original String");
+		// s = Sentence.EXIST + "x, y[P(x, y)]" + Sentence.IMPLIES + "¬(P(z)" +
+		// Sentence.OR + Sentence.FORALL + "x,y[P(x,y)∧P(y)])";
+		// s = "(P(z)" + Sentence.OR + Sentence.FORALL + "x,y[P(x)])";
+		// s = "∃x[P(x)]∧∀x[Q(x)⇒¬P(x)]"; // Corrected From Project
+		// s = "∃x[P(x)∧∀x[Q(x)⇒¬P(x)]]"; // Project
+		// s = "∀x[P (x) ∧ (Q(x) ∧ ∃y[Q(y) ∧ R(y, x)])]"; // Project
+		// s = "∀x[P (x) ⇔ (Q(x) ∧ ∃y[Q(y) ∧ R(y, x)])] ∧ ∃z[P(z) ∧ ∀x[Q(x) ∧
+		// ∃y[Q(y) ∧ R(y, x)]]]";
+		// s = "∀x[Q(x) ∧ ∃y[Q(y) ∧ R(y, x)]] ∧ ∃z[P(z) ∧ ∀x[Q(x) ∧ ∃y[Q(y) ∧
+		// R(y, x)]]]";
+		// System.out.println("Original String");
 		System.out.println(s);
 		System.out.println("=========================");
 
@@ -197,12 +201,12 @@ public class Parser {
 		System.out.println("Pushed Negation");
 		System.out.println(f);
 		System.out.println("=========================");
-		
+
 		f.standardize(new HashSet<String>());
 		System.out.println("Standardized");
 		System.out.println(f);
 		System.out.println("=========================");
-		
+
 		f.skolemize(new HashSet<String>());
 		System.out.println("Skolemized");
 		System.out.println(f);

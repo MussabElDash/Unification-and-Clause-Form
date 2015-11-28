@@ -10,6 +10,14 @@ public class Or extends Sentence {
 		this.formulas = formulas;
 	}
 
+	public static Sentence getFormula(int i, Sentence[] formulas) {
+		if (i == formulas.length - 1)
+			return formulas[i];
+		Sentence temp = getFormula(i + 1, formulas);
+		Sentence res = new Or(new Sentence[] { formulas[i], temp });
+		return res;
+	}
+
 	@Override
 	public Sentence negate() {
 		Sentence[] forms = new Sentence[formulas.length];
@@ -84,8 +92,8 @@ public class Or extends Sentence {
 		}
 		return new Or(forms);
 	}
-	
-	public Sentence[] getFormulas(){
+
+	public Sentence[] getFormulas() {
 		return this.formulas;
 	}
 
@@ -93,31 +101,69 @@ public class Or extends Sentence {
 	public Sentence distribute() {
 		Sentence a = this.formulas[0];
 		Sentence b = this.formulas[1];
-		if ((a instanceof Predicate && b instanceof Predicate)
-				|| (a instanceof Or && b instanceof Or)
-				|| (a instanceof Or && b instanceof Predicate)) {
+		if ((a instanceof Predicate && b instanceof Predicate) || (a instanceof Or && b instanceof Or)
+				|| (a instanceof Or && b instanceof Predicate) || (a instanceof Predicate && b instanceof Or)) {
 			return this;
-		} else if (a instanceof Or) {
-			Sentence b1 = b.getFormulas()[0];
-			Sentence b2 = b.getFormulas()[1];
-			return new And(
-					new Sentence[] {
-							new Or(new Sentence[] { a.distribute(),
-									b1.distribute() }),
-							new Or(new Sentence[] { a.distribute(),
-									b2.distribute() }) });
-		} else if (b instanceof Predicate) {
+		} else if (a instanceof And || b instanceof Predicate) {
 			Sentence a1 = a.getFormulas()[0];
 			Sentence a2 = a.getFormulas()[1];
-			return new And(
-					new Sentence[] {
-							new Or(new Sentence[] { a1.distribute(),
-									b.distribute() }),
-							new Or(new Sentence[] { a2.distribute(),
-									b.distribute() }) });
+			return new And(new Sentence[] { new Or(new Sentence[] { a1.distribute(), b.distribute() }).distribute(),
+					new Or(new Sentence[] { a2.distribute(), b.distribute() }).distribute() });
+		} else { // if (a instanceof Or) {
+			Sentence b1 = b.getFormulas()[0];
+			Sentence b2 = b.getFormulas()[1];
+			return new And(new Sentence[] { new Or(new Sentence[] { a.distribute(), b1.distribute() }).distribute(),
+					new Or(new Sentence[] { a.distribute(), b2.distribute() }).distribute() });
 		}
-		System.out.println(">>> Distribution Error!");
-		return null;
+		// System.out.println(">>> Distribution Error!");
+		// return null;
+	}
+
+	public static void main(String[] args) {
+		Sentence f = null;
+		// f = new Or(new Sentence[] { new Predicate("P(a)"),
+		// new And(new Sentence[] { new Predicate("P(b)"), new Predicate("P(c)")
+		// }) });
+
+		// f = new Or(new Sentence[] { new Predicate("P(a)"),
+		// new Or(new Sentence[] { new Predicate("P(b)"), new Predicate("P(c)")
+		// }) });
+
+		// f = new Or(new Sentence[] { new And(new Sentence[] { new
+		// Predicate("P(y)"), new Predicate("P(z)") }),
+		// new Predicate("P(x)") });
+
+		// f = new Or(new Sentence[] { new Predicate("P(x)"),
+		// new Or(new Sentence[] { new Predicate("P(y)"), new Predicate("P(z)")
+		// }) });
+
+		// f = new Or(new Sentence[] { new And(new Sentence[] { new
+		// Predicate("P(a)"), new Predicate("P(b)") }),
+		// new And(new Sentence[] { new Predicate("P(c)"), new Predicate("P(d)")
+		// }) });
+
+		// f = new Or(new Sentence[] { new Or(new Sentence[] { new
+		// Predicate("P(a)"), new Predicate("P(b)") }),
+		// new Or(new Sentence[] { new Predicate("P(c)"), new Predicate("P(d)")
+		// }) });
+
+		// f = new Or(new Sentence[] { new Or(new Sentence[] { new
+		// Predicate("P(a)"), new Predicate("P(b)") }),
+		// new And(new Sentence[] { new Predicate("P(c)"), new Predicate("P(d)")
+		// }) });
+
+		// f = new Or(new Sentence[] { new And(new Sentence[] { new
+		// Predicate("P(a)"), new Predicate("P(b)") }),
+		// new Or(new Sentence[] { new Predicate("P(c)"), new Predicate("P(d)")
+		// }) });
+
+		// f = new Or(new Sentence[] { new Predicate("P(a)"), new
+		// Predicate("P(b)") });
+
+		// f = new And(new Sentence[] { f, new Predicate("P(d)") });
+
+		f = f.distribute();
+		System.out.println(f);
 	}
 
 }
