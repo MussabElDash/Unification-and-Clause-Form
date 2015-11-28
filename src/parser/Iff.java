@@ -44,5 +44,10 @@ public class Iff extends Sentence {
 	public Sentence rename(String s, boolean toQuantifier) {
 		return this;
 	}
+	
+	public Sentence[] getFormulas(){
+		Sentence[] formulas = new Sentence[]{a,b};
+		return formulas;
+	}
 
 }

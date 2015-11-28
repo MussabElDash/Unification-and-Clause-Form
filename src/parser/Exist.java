@@ -85,4 +85,20 @@ public class Exist extends Sentence {
 		String[] newVars = renameVar(var);
 		return new Exist(newVars, formula.rename(var, false));
 	}
+	
+	public Sentence renameSkolemize(String var, String[] skolems){
+		return null;
+	}
+	
+	public Sentence[] getFormulas(){
+		Sentence[] formulas = new Sentence[]{formula};
+		return formulas;
+	}
+	
+	public void skolemize(Set<String> vars){
+		formula.skolemize(vars);
+		for(String var : this.vars){
+			formula = formula.renameSkolemize(var, vars);
+		}
+	}
 }

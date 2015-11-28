@@ -85,4 +85,16 @@ public class ForAll extends Sentence {
 		String[] newVars = renameVar(var);
 		return new ForAll(newVars, formula.rename(var, false));
 	}
+	
+	public Sentence[] getFormulas(){
+		Sentence[] formulas = new Sentence[]{formula};
+		return formulas;
+	}
+	
+	public void skolemize(Set<String> vars){
+		for(String var: this.vars){
+			vars.add(var);
+		}
+		super.skolemize(vars);
+	}
 }

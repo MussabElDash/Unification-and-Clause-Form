@@ -154,5 +154,9 @@ public class Predicate extends Sentence {
 		s = s.replaceAll(st + ",", st + "',");
 		return new Predicate(s);
 	}
+	
+	public Sentence[] getFormulas(){
+		return new Sentence[]{};
+	}
 
 }

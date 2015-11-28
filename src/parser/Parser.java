@@ -2,6 +2,7 @@ package parser;
 
 import java.util.ArrayList;
 import java.util.HashSet;
+import java.util.Set;
 
 public class Parser {
 	public static Sentence parse(String formula) {
@@ -166,11 +167,11 @@ public class Parser {
 		String s = "";
 		Sentence f = null;
 		// f = parse("∀x,y[P(x,y)]" + Formula.AND + "P(z)");
-//		s = Formula.EXIST + "x, y[P(x, y)]" + Formula.IMPLIES + "¬(P(z)" + Formula.OR + Formula.FORALL + "x,y[P(x,y)∧P(y)])";
-//		 s = "(P(z)" + Formula.OR + Formula.FORALL + "x,y[P(x)])";
+//		s = Sentence.EXIST + "x, y[P(x, y)]" + Sentence.IMPLIES + "¬(P(z)" + Sentence.OR + Sentence.FORALL + "x,y[P(x,y)∧P(y)])";
+//		 s = "(P(z)" + Sentence.OR + Sentence.FORALL + "x,y[P(x)])";
 //		 s = "∃x[P(x)]∧∀x[Q(x)⇒¬P(x)]"; // Corrected From Project
 //		 s = "∃x[P(x)∧∀x[Q(x)⇒¬P(x)]]"; // Project
-//		 s = "∀x[P (x) ⇔ (Q(x) ∧ ∃y[Q(y) ∧ R(y, x)])]"; // Project
+		 s = "∀x[P (x) ∧ (Q(x) ∧ ∃y[Q(y) ∧ R(y, x)])]"; // Project
 //		 s = "∀x[P (x) ⇔ (Q(x) ∧ ∃y[Q(y) ∧ R(y, x)])] ∧ ∃z[P(z) ∧ ∀x[Q(x) ∧ ∃y[Q(y) ∧ R(y, x)]]]";
 //		 s = "∀x[Q(x) ∧ ∃y[Q(y) ∧ R(y, x)]] ∧ ∃z[P(z) ∧ ∀x[Q(x) ∧ ∃y[Q(y) ∧ R(y, x)]]]";
 //		System.out.println("Original String");
@@ -178,7 +179,7 @@ public class Parser {
 		System.out.println("=========================");
 
 		f = parse(s);
-		System.out.println("Parsed Formula");
+		System.out.println("Parsed Sentence");
 		System.out.println(f);
 		System.out.println("=========================");
 
@@ -201,6 +202,12 @@ public class Parser {
 		System.out.println("Standardized");
 		System.out.println(f);
 		System.out.println("=========================");
+		
+		f.skolemize(new HashSet<String>());
+		System.out.println("Skolemized");
+		System.out.println(f);
+		System.out.println("=========================");
 		System.out.println(f.getClass());
+
 	}
 }

@@ -84,5 +84,9 @@ public class Or extends Sentence {
 		}
 		return new Or(forms);
 	}
+	
+	public Sentence[] getFormulas(){
+		return this.formulas;
+	}
 
 }

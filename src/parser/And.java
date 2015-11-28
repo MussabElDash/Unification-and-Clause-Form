@@ -83,4 +83,7 @@ public class And extends Sentence {
 		return new And(forms);
 	}
 
+	public Sentence[] getFormulas(){
+		return this.formulas;
+	}
 }
