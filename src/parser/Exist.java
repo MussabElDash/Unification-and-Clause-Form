@@ -98,7 +98,7 @@ public class Exist extends Sentence {
 	public void skolemize(Set<String> vars){
 		formula.skolemize(vars);
 		for(String var : this.vars){
-			formula = formula.renameSkolemize(var, vars);
+//			formula = formula.renameSkolemize(var, vars);
 		}
 	}
 }
