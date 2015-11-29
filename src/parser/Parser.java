@@ -208,7 +208,13 @@ public class Parser {
 		System.out.println("Skolemized");
 		System.out.println(f);
 		System.out.println("=========================");
+		
+		f = f.discardForAll();
+		System.out.println("Dsicarded For All");
+		System.out.println(f);
+		System.out.println("==========================");
 		System.out.println(f.getClass());
+		
 
 	}
 }

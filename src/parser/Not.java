@@ -43,9 +43,9 @@ public class Not extends Sentence {
 	public Sentence rename(String s, boolean toQuantifier) {
 		return new Not(formula.rename(s, toQuantifier));
 	}
-	
-	public Sentence[] getFormulas(){
-		Sentence[] formulas = new Sentence[]{formula};
+
+	public Sentence[] getFormulas() {
+		Sentence[] formulas = new Sentence[] { formula };
 		return formulas;
 	}
 
@@ -59,4 +59,5 @@ public class Not extends Sentence {
 	public Sentence renameSkolemize(String s, Set<String> skolems, boolean toQuantifier) {
 		return new Not(formula.renameSkolemize(s, skolems, toQuantifier));
 	}
+
 }

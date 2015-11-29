@@ -60,4 +60,5 @@ public class Implies extends Sentence {
 	public Sentence renameSkolemize(String s, Set<String> skolems, boolean toQuantifier) {
 		return this;
 	}
+
 }

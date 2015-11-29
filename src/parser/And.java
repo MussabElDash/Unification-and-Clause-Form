@@ -117,4 +117,5 @@ public class And extends Sentence {
 		}
 		return new And(forms);
 	}
+
 }

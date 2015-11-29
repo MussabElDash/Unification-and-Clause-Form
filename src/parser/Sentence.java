@@ -49,4 +49,12 @@ public abstract class Sentence {
 	
 	public abstract String getString();
 	
+	public Sentence discardForAll(){
+		Sentence[] formulas = this.getFormulas();
+		for(int i = 0; i< formulas.length; i++){
+			formulas[i] = formulas[i].discardForAll();
+		}
+		return this;
+	}
+	
 }

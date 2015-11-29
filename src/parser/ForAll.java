@@ -119,4 +119,9 @@ public class ForAll extends Sentence {
 		return new ForAll(newVars, formula.renameSkolemize(var, skolems, false));
 	}
 
+	@Override
+	public Sentence discardForAll() {
+		return this.formula;
+	}
+
 }
