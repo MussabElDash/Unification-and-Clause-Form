@@ -61,4 +61,13 @@ public abstract class Sentence {
 		return this instanceof Predicate || this instanceof Not;
 	}
 	
+	public static String toFunction(Set<String> skolems){
+		String s = "f(";
+		for(String var : skolems){
+			s += var +", ";
+		}
+		s = s.substring(0, s.length()-2);
+		s+= ")";
+		return s;
+	}
 }

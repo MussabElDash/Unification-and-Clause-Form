@@ -167,7 +167,7 @@ public class Predicate extends Sentence {
 	@Override
 	public Sentence renameSkolemize(String var, Set<String> skolems, boolean toQuantifier) {
 		String s = string;
-		String replacable = (skolems.size() == 0)? var.toUpperCase() : "f" + skolems.toString();
+		String replacable = (skolems.size() == 0)? var.toUpperCase() : toFunction(skolems);
 		s = s.replaceAll(var , replacable);
 		return new Predicate(s);
 	}
