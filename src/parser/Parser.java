@@ -173,8 +173,8 @@ public class Parser {
 //		 s = "∃x[P(x)]∧∀x[Q(x)⇒¬P(x)]"; // Corrected From Project
 //		 s = "∃x[P(x)∧∀x[Q(x)⇒¬P(x)]]"; // Project
 //		 s = "∀x[P (x) ∧ (Q(x) ∧ ∃y[Q(y) ∧ R(y, x)])]"; // Project
-//		 s = "∀x[P (x) ⇔ (Q(x) ∧ ∃y[Q(y) ∧ R(y, x)])] ∧ ∃z[P(z) ∧ ∀x[Q(x) ∧ ∃y[Q(y) ∧ R(y, x)]]]";
-		 s = "∀x[Q(x) ∧ ∃y[Q(y) ∧ R(y, x)]] ∧ ∃z[P(z) ∧ ∀x[Q(x) ∧ ∃y[Q(y) ∧ R(y, x)]]";
+		 s = "∀x[P (x) ⇔ (Q(x) ∧ ∃y[Q(y) ∧ R(y, x)])] ∧ ∃z[P(z) ∧ ∀x[Q(x) ∧ ∃y[Q(y) ∧ R(y, x)]]]";
+//		 s = "∀x[Q(x) ∧ ∃y[Q(y) ∧ R(y, x)]] ∧ ∃z[P(z) ∧ ∀x[Q(x) ∧ ∃y[Q(y) ∧ R(y, x)]]";
 		System.out.println("Original String");
 		System.out.println(s);
 		System.out.println("=========================");
@@ -213,8 +213,12 @@ public class Parser {
 		System.out.println("Dsicarded For All");
 		System.out.println(f);
 		System.out.println("==========================");
-		System.out.println(f.getClass());
 		
+		f = f.distribute();
+		System.out.println("Distributed");
+		System.out.println(f);
+		System.out.println("==========================");
+		System.out.println(f.getClass());
 
 	}
 }
