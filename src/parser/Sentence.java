@@ -57,4 +57,8 @@ public abstract class Sentence {
 		return this;
 	}
 	
+	public boolean isSingle() {
+		return this instanceof Predicate || this instanceof Not;
+	}
+	
 }

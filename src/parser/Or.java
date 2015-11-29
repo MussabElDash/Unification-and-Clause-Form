@@ -101,10 +101,10 @@ public class Or extends Sentence {
 	public Sentence distribute() {
 		Sentence a = this.formulas[0];
 		Sentence b = this.formulas[1];
-		if ((a instanceof Predicate && b instanceof Predicate) || (a instanceof Or && b instanceof Or)
-				|| (a instanceof Or && b instanceof Predicate) || (a instanceof Predicate && b instanceof Or)) {
+		if ((a.isSingle() && b.isSingle()) || (a instanceof Or && b instanceof Or)
+				|| (a instanceof Or && b.isSingle()) || (a.isSingle() && b instanceof Or)) {
 			return this;
-		} else if (a instanceof And || b instanceof Predicate) {
+		} else if (a instanceof And || b.isSingle()) {
 			Sentence a1 = a.getFormulas()[0];
 			Sentence a2 = a.getFormulas()[1];
 			return new And(new Sentence[] { new Or(new Sentence[] { a1.distribute(), b.distribute() }).distribute(),
