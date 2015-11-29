@@ -19,8 +19,8 @@ public class Not extends Sentence {
 		return "¬" + bracketize(formula);
 	}
 	
-	public String cnfString(){
-		return "¬" + formula.cnfString();
+	public String clauseFormString(){
+		return "¬" + formula.clauseFormString();
 	}
 
 	@Override

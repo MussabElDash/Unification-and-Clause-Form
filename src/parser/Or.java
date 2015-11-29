@@ -38,12 +38,12 @@ public class Or extends Sentence {
 		return res;
 	}
 	
-	public String cnfString(){
+	public String clauseFormString(){
 		if (formulas.length == 0)
 			return "";
-		String res = formulas[0].cnfString();
+		String res = formulas[0].clauseFormString();
 		for (int i = 1; i < formulas.length; i++) {
-			res += ", " + formulas[i].cnfString();
+			res += ", " + formulas[i].clauseFormString();
 		}
 		return res;
 	}

@@ -80,13 +80,28 @@ public abstract class Sentence {
 				cnf += f.toCNF();
 
 			} else {
-				cnf += "{" + f.cnfString() + "},\n";
+				cnf += "∧ {" + f.toString() + "},\n";
 			}
 		}
 		return cnf;
 	}
-	
-	public String cnfString(){
+
+	public String toClauseForm() {
+		String clauseForm = "";
+		Sentence[] formulas = this.getFormulas();
+		for (int i = 0; i < formulas.length; i++) {
+			Sentence f = formulas[i];
+			if (f.getClass() == And.class) {
+				clauseForm += f.toClauseForm();
+
+			} else {
+				clauseForm += "{" + f.clauseFormString() + "},\n";
+			}
+		}
+		return clauseForm;
+	}
+
+	public String clauseFormString() {
 		return this.toString();
 	}
 }
