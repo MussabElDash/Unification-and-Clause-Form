@@ -37,7 +37,17 @@ public class Or extends Sentence {
 		}
 		return res;
 	}
-
+	
+	public String cnfString(){
+		if (formulas.length == 0)
+			return "";
+		String res = formulas[0].cnfString();
+		for (int i = 1; i < formulas.length; i++) {
+			res += ", " + formulas[i].cnfString();
+		}
+		return res;
+	}
+	
 	@Override
 	public Sentence iffElimination() {
 		Sentence[] forms = new Sentence[formulas.length];

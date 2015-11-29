@@ -218,7 +218,13 @@ public class Parser {
 		System.out.println("Distributed");
 		System.out.println(f);
 		System.out.println("==========================");
-		System.out.println(f.getClass());
-
+//		System.out.println(f.getClass());
+		
+		System.out.println("CNF");
+		System.out.println("==========================");
+		String cnf = f.toCNF();
+		cnf = cnf.substring(0, cnf.length()-2);
+		cnf = "{" + cnf + "}";
+		System.out.println(cnf);
 	}
 }

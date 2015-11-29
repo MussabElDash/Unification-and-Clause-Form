@@ -30,7 +30,7 @@ public abstract class Sentence {
 	public abstract Set<String> standardize(Set<String> vars);
 
 	public abstract Sentence rename(String s, boolean toQuantifier);
-	
+
 	public abstract Sentence renameSkolemize(String s, Set<String> skolems, boolean toQuantitifer);
 
 	public abstract Sentence[] getFormulas();
@@ -46,28 +46,47 @@ public abstract class Sentence {
 	public Sentence distribute() {
 		return this;
 	}
-	
+
 	public abstract String getString();
-	
-	public Sentence discardForAll(){
+
+	public Sentence discardForAll() {
 		Sentence[] formulas = this.getFormulas();
-		for(int i = 0; i< formulas.length; i++){
+		for (int i = 0; i < formulas.length; i++) {
 			formulas[i] = formulas[i].discardForAll();
 		}
 		return this;
 	}
-	
+
 	public boolean isSingle() {
 		return this instanceof Predicate || this instanceof Not;
 	}
-	
-	public static String toFunction(Set<String> skolems){
+
+	public static String toFunction(Set<String> skolems) {
 		String s = "f(";
-		for(String var : skolems){
-			s += var +", ";
+		for (String var : skolems) {
+			s += var + ", ";
 		}
-		s = s.substring(0, s.length()-2);
-		s+= ")";
+		s = s.substring(0, s.length() - 2);
+		s += ")";
 		return s;
+	}
+
+	public String toCNF() {
+		String cnf = "";
+		Sentence[] formulas = this.getFormulas();
+		for (int i = 0; i < formulas.length; i++) {
+			Sentence f = formulas[i];
+			if (f.getClass() == And.class) {
+				cnf += f.toCNF();
+
+			} else {
+				cnf += "{" + f.cnfString() + "},\n";
+			}
+		}
+		return cnf;
+	}
+	
+	public String cnfString(){
+		return this.toString();
 	}
 }

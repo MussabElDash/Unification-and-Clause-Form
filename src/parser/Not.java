@@ -18,6 +18,10 @@ public class Not extends Sentence {
 	public String toString() {
 		return "¬" + bracketize(formula);
 	}
+	
+	public String cnfString(){
+		return "¬" + formula.cnfString();
+	}
 
 	@Override
 	public Sentence iffElimination() {

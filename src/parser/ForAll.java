@@ -121,7 +121,7 @@ public class ForAll extends Sentence {
 
 	@Override
 	public Sentence discardForAll() {
-		return this.formula;
+		return this.formula.discardForAll();
 	}
 
 }
