@@ -10,6 +10,14 @@ public class And extends Sentence {
 		this.formulas = formulas;
 	}
 
+	public static Sentence getFormula(int i, Sentence[] formulas) {
+		if (i == formulas.length - 1)
+			return formulas[i];
+		Sentence temp = getFormula(i + 1, formulas);
+		Sentence res = new And(new Sentence[] { formulas[i], temp });
+		return res;
+	}
+
 	@Override
 	public Sentence negate() {
 		Sentence[] forms = new Sentence[formulas.length];
@@ -82,22 +90,31 @@ public class And extends Sentence {
 		}
 		return new And(forms);
 	}
-	
-	public Sentence renameSkolemize(String var, Set<String> skolems, boolean toQuantifier){
+
+	public Sentence renameSkolemize(String var, Set<String> skolems, boolean toQuantifier) {
 		Sentence[] forms = new Sentence[formulas.length];
-		for(int i = 0; i< forms.length; i++){
+		for (int i = 0; i < forms.length; i++) {
 			forms[i] = formulas[i].renameSkolemize(var, skolems, toQuantifier);
 		}
 		return new And(forms);
 	}
 
-	public Sentence[] getFormulas(){
+	public Sentence[] getFormulas() {
 		return this.formulas;
 	}
 
 	@Override
+
 	public String getString() {
 		// TODO Auto-generated method stub
 		return null;
+	}
+
+	public Sentence distribute() {
+		Sentence[] forms = new Sentence[formulas.length];
+		for (int i = 0; i < forms.length; i++) {
+			forms[i] = formulas[i].distribute();
+		}
+		return new And(forms);
 	}
 }
