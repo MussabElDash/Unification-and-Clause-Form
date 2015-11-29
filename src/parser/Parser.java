@@ -171,9 +171,9 @@ public class Parser {
 //		 s = "(P(z)" + Sentence.OR + Sentence.FORALL + "x,y[P(x)])";
 //		 s = "∃x[P(x)]∧∀x[Q(x)⇒¬P(x)]"; // Corrected From Project
 //		 s = "∃x[P(x)∧∀x[Q(x)⇒¬P(x)]]"; // Project
-		 s = "P (x) ∧ (Q(x) ∧ ∃y[Q(y) ∧ R(y, x)])"; // Project
+//		 s = "∀x[P (x) ∧ (Q(x) ∧ ∃y[Q(y) ∧ R(y, x)])]"; // Project
 //		 s = "∀x[P (x) ⇔ (Q(x) ∧ ∃y[Q(y) ∧ R(y, x)])] ∧ ∃z[P(z) ∧ ∀x[Q(x) ∧ ∃y[Q(y) ∧ R(y, x)]]]";
-//		 s = "∀x[Q(x) ∧ ∃y[Q(y) ∧ R(y, x)]] ∧ ∃z[P(z) ∧ ∀x[Q(x) ∧ ∃y[Q(y) ∧ R(y, x)]]]";
+		 s = "∀x[Q(x) ∧ ∃y[Q(y) ∧ R(y, x)]] ∧ ∃z[P(z) ∧ ∀x[Q(x) ∧ ∃y[Q(y) ∧ R(y, x)]]";
 		System.out.println("Original String");
 		System.out.println(s);
 		System.out.println("=========================");

@@ -85,17 +85,24 @@ public class ForAll extends Sentence {
 		String[] newVars = renameVar(var);
 		return new ForAll(newVars, formula.rename(var, false));
 	}
-	
-	public Sentence[] getFormulas(){
-		Sentence[] formulas = new Sentence[]{formula};
+
+	public Sentence[] getFormulas() {
+		Sentence[] formulas = new Sentence[] { formula };
 		return formulas;
 	}
-	
-	public Sentence skolemize(Set<String> vars){
-		for(String var: this.vars){
+
+	public Sentence skolemize(Set<String> vars) {
+		for (String var : this.vars) {
 			vars.add(var);
 		}
-		return super.skolemize(vars);
+		Sentence[] formulas = this.getFormulas();
+		for (int i = 0; i < formulas.length; i++) {
+			formulas[i] = formulas[i].skolemize(vars);
+		}
+		for (String var : this.vars) {
+			vars.remove(var);
+		}
+		return this;
 	}
 
 	@Override
@@ -109,7 +116,7 @@ public class ForAll extends Sentence {
 		if (toQuantifier)
 			return this;
 		String[] newVars = renameVar(var);
-		return new ForAll(newVars, formula.renameSkolemize(var,skolems, false));
+		return new ForAll(newVars, formula.renameSkolemize(var, skolems, false));
 	}
 
 }
