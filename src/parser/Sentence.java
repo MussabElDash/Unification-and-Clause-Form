@@ -80,7 +80,7 @@ public abstract class Sentence {
 				cnf += f.toCNF();
 
 			} else {
-				cnf += "∧ {" + f.toString() + "},\n";
+				cnf += "∧ {" + f.clauseFormString() + "},\n";
 			}
 		}
 		return cnf;
