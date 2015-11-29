@@ -80,28 +80,47 @@ public abstract class Sentence {
 				cnf += f.toCNF();
 
 			} else {
-				cnf += "∧ {" + f.clauseFormString() + "},\n";
+				cnf += "∧ (" + f.toStringCNF() + ")\n";
 			}
 		}
 		return cnf;
 	}
-
-	public String toClauseForm() {
-		String clauseForm = "";
+	
+	public String toClauseFormI() {
+		String clauseFormI = "";
 		Sentence[] formulas = this.getFormulas();
 		for (int i = 0; i < formulas.length; i++) {
 			Sentence f = formulas[i];
 			if (f.getClass() == And.class) {
-				clauseForm += f.toClauseForm();
+				clauseFormI += f.toClauseFormI();
 
 			} else {
-				clauseForm += "{" + f.clauseFormString() + "},\n";
+				clauseFormI += "∧ {" + f.toStringClauseForm() + "}\n";
 			}
 		}
-		return clauseForm;
+		return clauseFormI;
 	}
 
-	public String clauseFormString() {
+	public String toClauseFormII() {
+		String clauseFormII = "";
+		Sentence[] formulas = this.getFormulas();
+		for (int i = 0; i < formulas.length; i++) {
+			Sentence f = formulas[i];
+			if (f.getClass() == And.class) {
+				clauseFormII += f.toClauseFormII();
+
+			} else {
+				clauseFormII += "{" + f.toStringClauseForm() + "},\n";
+			}
+		}
+		return clauseFormII;
+	}
+
+	public String toStringClauseForm() {
+		return this.toString();
+	}
+	
+	public String toStringCNF(){
 		return this.toString();
 	}
 }

@@ -38,16 +38,25 @@ public class Or extends Sentence {
 		return res;
 	}
 	
-	public String clauseFormString(){
+	public String toStringClauseForm(){
 		if (formulas.length == 0)
 			return "";
-		String res = formulas[0].clauseFormString();
+		String res = formulas[0].toStringClauseForm();
 		for (int i = 1; i < formulas.length; i++) {
-			res += ", " + formulas[i].clauseFormString();
+			res += ", " + formulas[i].toStringClauseForm();
 		}
 		return res;
 	}
-	
+	public String toStringCNF(){
+		if (formulas.length == 0)
+			return "";
+		String res = formulas[0].toStringCNF();
+		for (int i = 1; i < formulas.length; i++) {
+			res += " ∨  " + formulas[i].toStringCNF();
+		}
+		return res;
+	}
+
 	@Override
 	public Sentence iffElimination() {
 		Sentence[] forms = new Sentence[formulas.length];

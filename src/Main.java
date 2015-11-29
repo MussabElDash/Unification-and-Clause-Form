@@ -84,8 +84,15 @@ public class Main {
 			System.out.println("==========================");
 			String cnf = f.toCNF();
 			cnf = cnf.substring(2, cnf.length()-2);
-			cnf = "{" + cnf + "}";
+			cnf = "(" + cnf + ")";
 			System.out.println(cnf);
+
+			System.out.println("\nClause-Form I");
+			System.out.println("==========================");
+			String clauseFormI = f.toClauseFormI();
+			clauseFormI = clauseFormI.substring(2, clauseFormI.length()-2);
+			clauseFormI = "{" + clauseFormI + "}";
+			System.out.println(clauseFormI);
 
 		}else{
 			f = Parser.parse(sentence);
@@ -97,12 +104,12 @@ public class Main {
 			f = f.discardForAll();
 			f = f.distribute();
 		}
-		System.out.println("\nClause-Form");
+		System.out.println("\nClause-Form II");
 		System.out.println("==========================");
-		String clauseForm = f.toClauseForm();
-		clauseForm = clauseForm.substring(0, clauseForm.length()-2);
-		clauseForm = "{" + clauseForm + "}";
-		System.out.println(clauseForm);
+		String clauseFormII = f.toClauseFormII();
+		clauseFormII = clauseFormII.substring(0, clauseFormII.length()-2);
+		clauseFormII = "{" + clauseFormII + "}";
+		System.out.println(clauseFormII);
 
 	}
 	
