@@ -120,4 +120,19 @@ public class Or extends Sentence {
 		return null;
 	}
 
+	@Override
+	public String getString() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public Sentence renameSkolemize(String s, Set<String> skolems, boolean toQuantifier) {
+		Sentence[] forms = new Sentence[formulas.length];
+		for (int i = 0; i < forms.length; i++) {
+			forms[i] = formulas[i].renameSkolemize(s, skolems, toQuantifier);
+		}
+		return new Or(forms);
+	}
+
 }

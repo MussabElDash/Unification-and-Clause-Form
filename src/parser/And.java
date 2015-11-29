@@ -82,8 +82,22 @@ public class And extends Sentence {
 		}
 		return new And(forms);
 	}
+	
+	public Sentence renameSkolemize(String var, Set<String> skolems, boolean toQuantifier){
+		Sentence[] forms = new Sentence[formulas.length];
+		for(int i = 0; i< forms.length; i++){
+			forms[i] = formulas[i].renameSkolemize(var, skolems, toQuantifier);
+		}
+		return new And(forms);
+	}
 
 	public Sentence[] getFormulas(){
 		return this.formulas;
+	}
+
+	@Override
+	public String getString() {
+		// TODO Auto-generated method stub
+		return null;
 	}
 }

@@ -30,18 +30,23 @@ public abstract class Sentence {
 	public abstract Set<String> standardize(Set<String> vars);
 
 	public abstract Sentence rename(String s, boolean toQuantifier);
+	
+	public abstract Sentence renameSkolemize(String s, Set<String> skolems, boolean toQuantitifer);
 
 	public abstract Sentence[] getFormulas();
 
-	public void skolemize(Set<String> vars) {
+	public Sentence skolemize(Set<String> vars) {
 		Sentence[] formulas = this.getFormulas();
 		for (int i = 0; i < formulas.length; i++) {
-			Sentence f = formulas[i];
-			f.skolemize(vars);
+			formulas[i] = formulas[i].skolemize(vars);
 		}
+		return this;
 	}
 
 	public Sentence distribute() {
 		return this;
 	}
+	
+	public abstract String getString();
+	
 }

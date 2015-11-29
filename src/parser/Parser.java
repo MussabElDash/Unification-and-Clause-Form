@@ -174,7 +174,7 @@ public class Parser {
 		 s = "∀x[P (x) ∧ (Q(x) ∧ ∃y[Q(y) ∧ R(y, x)])]"; // Project
 //		 s = "∀x[P (x) ⇔ (Q(x) ∧ ∃y[Q(y) ∧ R(y, x)])] ∧ ∃z[P(z) ∧ ∀x[Q(x) ∧ ∃y[Q(y) ∧ R(y, x)]]]";
 //		 s = "∀x[Q(x) ∧ ∃y[Q(y) ∧ R(y, x)]] ∧ ∃z[P(z) ∧ ∀x[Q(x) ∧ ∃y[Q(y) ∧ R(y, x)]]]";
-//		System.out.println("Original String");
+		System.out.println("Original String");
 		System.out.println(s);
 		System.out.println("=========================");
 
@@ -201,9 +201,9 @@ public class Parser {
 		f.standardize(new HashSet<String>());
 		System.out.println("Standardized");
 		System.out.println(f);
-		System.out.println("=========================");
+		System.out.println("=========================");	
 		
-		f.skolemize(new HashSet<String>());
+		f = f.skolemize(new HashSet<String>());
 		System.out.println("Skolemized");
 		System.out.println(f);
 		System.out.println("=========================");

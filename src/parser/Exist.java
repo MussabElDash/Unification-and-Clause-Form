@@ -78,6 +78,19 @@ public class Exist extends Sentence {
 		return newVars;
 	}
 
+	private String[] renameVarSkolemize(String var, Set<String> skolems){
+		String[] newVars = new String[vars.length];
+		for(int i =0; i<newVars.length; i++){
+			String s = vars[i];
+			if(s.equals(var)){
+				newVars[i] = "f(" + skolems.toString() + ")";
+			}else {
+				newVars[i] = s;
+			}
+		}
+		return newVars;
+	}
+	
 	@Override
 	public Sentence rename(String var, boolean toQuantifier) {
 		if (toQuantifier)
@@ -86,8 +99,11 @@ public class Exist extends Sentence {
 		return new Exist(newVars, formula.rename(var, false));
 	}
 	
-	public Sentence renameSkolemize(String var, String[] skolems){
-		return null;
+	public Sentence renameSkolemize(String var, Set<String> skolems, boolean toQuantifier){
+		if (toQuantifier)
+			return this;
+		String[] newVars = renameVarSkolemize(var, skolems);
+		return formula.renameSkolemize(var, skolems,  false);
 	}
 	
 	public Sentence[] getFormulas(){
@@ -95,10 +111,17 @@ public class Exist extends Sentence {
 		return formulas;
 	}
 	
-	public void skolemize(Set<String> vars){
+	public Sentence skolemize(Set<String> vars){
 		formula.skolemize(vars);
 		for(String var : this.vars){
-//			formula = formula.renameSkolemize(var, vars);
+			formula = formula.renameSkolemize(var, vars, false);
 		}
+		return this.formula;
+	}
+
+	@Override
+	public String getString() {
+		// TODO Auto-generated method stub
+		return null;
 	}
 }

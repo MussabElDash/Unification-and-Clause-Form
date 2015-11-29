@@ -50,4 +50,15 @@ public class Iff extends Sentence {
 		return formulas;
 	}
 
+	@Override
+	public String getString() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public Sentence renameSkolemize(String s, Set<String> skolems, boolean toQuantiifer) {
+		return this;
+	}
+
 }

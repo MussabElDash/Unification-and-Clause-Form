@@ -48,4 +48,15 @@ public class Not extends Sentence {
 		Sentence[] formulas = new Sentence[]{formula};
 		return formulas;
 	}
+
+	@Override
+	public String getString() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public Sentence renameSkolemize(String s, Set<String> skolems, boolean toQuantifier) {
+		return new Not(formula.renameSkolemize(s, skolems, toQuantifier));
+	}
 }

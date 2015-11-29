@@ -49,4 +49,15 @@ public class Implies extends Sentence {
 		Sentence[] formulas = new Sentence[]{a,b};
 		return formulas;
 	}
+
+	@Override
+	public String getString() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public Sentence renameSkolemize(String s, Set<String> skolems, boolean toQuantifier) {
+		return this;
+	}
 }

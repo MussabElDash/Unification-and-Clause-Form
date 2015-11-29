@@ -154,9 +154,22 @@ public class Predicate extends Sentence {
 		s = s.replaceAll(st + ",", st + "',");
 		return new Predicate(s);
 	}
-	
+		
 	public Sentence[] getFormulas(){
 		return new Sentence[]{};
+	}
+
+	@Override
+	public String getString() {
+		return this.string;
+	}
+
+	@Override
+	public Sentence renameSkolemize(String var, Set<String> skolems, boolean toQuantifier) {
+		String s = string;
+		s = s.replaceAll(var , "f" + skolems.toString() + "");
+		s = s.replaceAll(var + ",", "f" + skolems.toString() + ",");
+		return new Predicate(s);
 	}
 
 }

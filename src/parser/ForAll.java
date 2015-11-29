@@ -91,10 +91,25 @@ public class ForAll extends Sentence {
 		return formulas;
 	}
 	
-	public void skolemize(Set<String> vars){
+	public Sentence skolemize(Set<String> vars){
 		for(String var: this.vars){
 			vars.add(var);
 		}
-		super.skolemize(vars);
+		return super.skolemize(vars);
 	}
+
+	@Override
+	public String getString() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public Sentence renameSkolemize(String var, Set<String> skolems, boolean toQuantifier) {
+		if (toQuantifier)
+			return this;
+		String[] newVars = renameVar(var);
+		return new ForAll(newVars, formula.renameSkolemize(var,skolems, false));
+	}
+
 }
