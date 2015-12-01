@@ -1,4 +1,4 @@
-package parser;
+package clauseForm;
 
 import java.util.HashSet;
 import java.util.Set;

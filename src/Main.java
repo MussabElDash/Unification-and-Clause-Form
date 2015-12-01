@@ -2,26 +2,34 @@
 import java.util.HashMap;
 import java.util.HashSet;
 
+import clauseForm.Sentence;
 import parser.Parser;
-import parser.Sentence;
 import unification.Unifier;
 
 public class Main {
 
 	public static void main(String[] args) {
-//		testUnifier(true);
+
+		// Calls the Unifier Function, with a boolean specifying trace mode on
+		// or off.
+		testUnifier(false);
+
+		// Calls the ClauseForm Function, with a boolean specifying trace mode
+		// on or off.
+		testClausForm(true);
+	}
+
+	public static void testClausForm(boolean traceMode) {
+
+		//Choose the String of FOL to operate on.
 		String s = "";
-		// s = "P (x) ∧ Q(x) ∧ Q(y) ∧ R(y, x)";
-		// f = parse("∀x,y[P(x,y)]" + Formula.AND + "P(z)");
-//		s = Sentence.EXIST + "x, y[P(x, y)]" + Sentence.IMPLIES + "¬(P(z)" + Sentence.OR + Sentence.FORALL + "x,y[P(x,y)∧P(y)])";
-//		 s = "(P(z)" + Sentence.OR + Sentence.FORALL + "x,y[P(x)])";
-//		 s = "∃x[P(x)]∧∀x[Q(x)⇒¬P(x)]"; // Corrected From Project
-//		 s = "∃x[P(x)∧∀x[Q(x)⇒¬P(x)]]"; // Project
-//		 s = "∀x[P (x) ∧ (Q(x) ∧ ∃y[Q(y) ∧ R(y, x)]) ∧ ∃z[∃w[Q(w) ∧ R(z, x)]])]"; // Project
-//		 s = "∀x[P (x) ⇔ (Q(x) ∧ ∃y[Q(y) ∧ R(y, x)])]";
-//		 s = "∀x[Q(x) ∧ ∃y[Q(y) ∧ R(y, x)]] ⇒ ∃z[P(z) ∧ ∀x[Q(x) ∧ ∃y[Q(y) ∧ R(y, x)]]";
-		
-		ClauseForm(s, true);
+//		 s = "P (x) ∧ Q(x) ∧ Q(y) ∧ R(y, x)";
+//		 s = "∃x[P(x)]∧∀x[Q(x)⇒¬P(x)]"; // Project
+//		 s = "∀x[P (x) ∧ (Q(x) ∧ ∃y[Q(y) ∧ R(y, x)]) ∧ ∃z[∃w[Q(w) ∧ R(z,// x)]])]"; // Project
+		 s = "∀x[P (x) ⇔ (Q(x) ∧ ∃y[Q(y) ∧ R(y, x)])]";
+//		 s = "∀x[Q(x) ∧ ∃y[Q(y) ∧ R(y, x)]] ⇒ ∃z[P(z) ∧ ∀x[Q(x) ∧ ∃y[Q(y) ∧R(y, x)]]";
+
+		ClauseForm(s, traceMode);
 	}
 
 	public static void ClauseForm(String sentence, boolean traceMode) {
@@ -85,7 +93,13 @@ public class Main {
 			clauseFormI = clauseFormI.substring(2, clauseFormI.length() - 2);
 			clauseFormI = "{" + clauseFormI + "}";
 			System.out.println(clauseFormI);
-			
+						System.out.println("\nClause-Form II");
+			System.out.println("==========================");
+			String clauseFormII = f.toClauseFormII();
+			clauseFormII = clauseFormII.substring(0, clauseFormII.length() - 2);
+			clauseFormII = "{" + clauseFormII + "}";
+			System.out.println(clauseFormII);
+
 
 		} else {
 			f = Parser.parse(sentence);
@@ -97,21 +111,14 @@ public class Main {
 			f = f.discardForAll();
 			f = f.distribute();
 		}
-		System.out.println("\nClause-Form II");
-		System.out.println("==========================");
-		String clauseFormII = f.toClauseFormII();
-		clauseFormII = clauseFormII.substring(0, clauseFormII.length() - 2);
-		clauseFormII = "{" + clauseFormII + "}";
-		System.out.println(clauseFormII);
-		
+
 		System.out.println("\nClause-Form III");
 		System.out.println("==========================");
-		String ClauseFormIII= f.toClauseFormIII();
-//		String clauseFormIII = f.toClauseFormII();
-		ClauseFormIII = ClauseFormIII.substring(0, ClauseFormIII.length()-2);
+		String ClauseFormIII = f.toClauseFormIII();
+		// String clauseFormIII = f.toClauseFormII();
+		ClauseFormIII = ClauseFormIII.substring(0, ClauseFormIII.length() - 2);
 		ClauseFormIII = "{" + ClauseFormIII + "}";
 		System.out.println(ClauseFormIII);
-		
 
 	}
 

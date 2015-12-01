@@ -1,7 +1,9 @@
-package parser;
+package clauseForm;
 
 import java.util.HashSet;
 import java.util.Set;
+
+import parser.Parser;
 
 public class Exist extends Sentence {
 	private String[] vars;

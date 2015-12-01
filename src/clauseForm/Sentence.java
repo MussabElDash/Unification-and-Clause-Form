@@ -1,6 +1,8 @@
-package parser;
+package clauseForm;
 
 import java.util.Set;
+
+import parser.Parser;
 
 public abstract class Sentence {
 	public static char AND = '∧', OR = '∨', NOT = '¬';

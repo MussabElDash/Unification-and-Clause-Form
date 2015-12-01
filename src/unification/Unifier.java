@@ -3,7 +3,7 @@ package unification;
 import java.util.Arrays;
 import java.util.HashMap;
 
-import parser.Predicate;
+import clauseForm.Predicate;
 
 public class Unifier {
 	private static boolean trace;

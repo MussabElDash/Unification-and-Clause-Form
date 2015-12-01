@@ -1,4 +1,4 @@
-package parser;
+package clauseForm;
 
 import java.util.Set;
 
@@ -54,7 +54,7 @@ public class Not extends Sentence {
 	}
 
 	public String standardize(int cn){
-		return this.formula.standardize(cn);
+		return "¬" + this.formula.standardize(cn);
 	}
 	@Override
 	public String getString() {

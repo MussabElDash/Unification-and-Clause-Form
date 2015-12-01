@@ -6,6 +6,16 @@ import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Set;
 
+import clauseForm.And;
+import clauseForm.Exist;
+import clauseForm.ForAll;
+import clauseForm.Iff;
+import clauseForm.Implies;
+import clauseForm.Not;
+import clauseForm.Or;
+import clauseForm.Predicate;
+import clauseForm.Sentence;
+
 public class Parser {
 	public static ArrayList<String> functionSymbols = new ArrayList<String>(Arrays.asList("f", "g", "h", "i", "j", "k","l","m","n","o","s","t"));
 	public static ArrayList<String> constans = new ArrayList<String>(Arrays.asList("a", "b", "c", "d", "e", "p", "q", "r", "u", "v", "w", "x", "y", "z"));
