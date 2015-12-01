@@ -61,10 +61,19 @@ public abstract class Sentence {
 		return this instanceof Predicate || this instanceof Not;
 	}
 
-	public static String toFunction(Set<String> skolems) {
-		String s = "f(";
-		for (String var : skolems) {
-			s += var + ", ";
+	public static String toFunction(String var, Set<String> skolems) {
+		String functionSymbol;
+		if (Parser.varTosym.containsKey(var)){
+			functionSymbol = Parser.varTosym.get(var);
+		}else{
+			functionSymbol = Parser.functionSymbols.get(0);
+			Parser.functionSymbols.remove(0);
+			Parser.varTosym.put(var, functionSymbol);
+		}
+		Parser.functionSymbols.remove(0);
+		String s = functionSymbol + "(";
+		for (String skolem : skolems) {
+			s += skolem + ", ";
 		}
 		s = s.substring(0, s.length() - 2);
 		s += ")";

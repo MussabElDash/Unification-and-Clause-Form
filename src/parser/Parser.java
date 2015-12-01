@@ -1,10 +1,16 @@
 package parser;
 
 import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Set;
 
 public class Parser {
+	public static ArrayList<String> functionSymbols = new ArrayList<String>(Arrays.asList("f", "g", "h", "i", "j", "k","l","m","n","o","s","t"));
+	public static ArrayList<String> constans = new ArrayList<String>(Arrays.asList("a", "b", "c", "d", "e", "p", "q", "r", "u", "v", "w", "x", "y", "z"));
+	public static HashMap<String,String> varTosym = new HashMap<String,String>();
+	
 	public static Sentence parse(String formula) {
 		formula = formula.replaceAll(" ", "");
 		int i, j, count = 0;

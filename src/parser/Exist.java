@@ -83,7 +83,9 @@ public class Exist extends Sentence {
 		for(int i =0; i<newVars.length; i++){
 			String s = vars[i];
 			if(s.equals(var)){
-				newVars[i] = "f(" + skolems.toString() + ")";
+				String functionSymbol = Parser.functionSymbols.get(0);
+				Parser.functionSymbols.remove(0);
+				newVars[i] = functionSymbol + "(" + skolems.toString() + ")";
 			}else {
 				newVars[i] = s;
 			}
