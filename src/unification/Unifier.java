@@ -16,6 +16,11 @@ public class Unifier {
 		Object o1 = Predicate.listify(a);
 		Object o2 = Predicate.listify(b);
 		HashMap<String, Object> map = getMGU(o1, o2, new HashMap<String, Object>());
+		HashMap<String, String> res = stringify(map);
+		return res;
+	}
+
+	private static HashMap<String, String> stringify(HashMap<String, Object> map) {
 		if (map == null)
 			return null;
 		HashMap<String, String> res = new HashMap<String, String>();
@@ -41,7 +46,8 @@ public class Unifier {
 		if (arr1.length != arr2.length)
 			return null;
 		if (trace)
-			System.out.println("Unifying: " + Arrays.deepToString(arr1) + "\twith\t" + Arrays.deepToString(arr2));
+			System.out.println("Unifying: " + Arrays.deepToString(arr1) + "\tand\t" + Arrays.deepToString(arr2)
+					+ "\tusing the unifier\t" + stringify(map));
 		return getMGU(Predicate.rest(arr1), Predicate.rest(arr2),
 				getMGU(Predicate.first(arr1), Predicate.first(arr2), map));
 	}
@@ -111,67 +117,5 @@ public class Unifier {
 				return true;
 		}
 		return false;
-	}
-
-	public static void main(String[] args) {
-		// System.out.println("=========================");
-		// System.out.println(stringListify("P(x,g(x),g(f(a)))"));
-		// System.out.println(Arrays.deepToString(listify("P(x,g(x),g(f(a)))")));
-		// System.out.println("=========================");
-		//
-		// System.out.println(stringListify("P(f(u),v,v)"));
-		// System.out.println(Arrays.deepToString(listify("P(f(u),v,v)")));
-		// System.out.println("=========================");
-		//
-		// System.out.println(stringListify("P(a,y,f(y))"));
-		// System.out.println(Arrays.deepToString(listify("P(a,y,f(y))")));
-		// System.out.println("=========================");
-		//
-		// System.out.println(stringListify("P(z,z,u)"));
-		// System.out.println(Arrays.deepToString(listify("P(z,z,u)")));
-		// System.out.println("=========================");
-		//
-		// System.out.println(stringListify("f(x,g(x),x)"));
-		// System.out.println(Arrays.deepToString(listify("f(x,g(x),x)")));
-		// System.out.println("=========================");
-		//
-		// System.out.println(stringListify("f(g(u),g(g(z)),z)"));
-		// System.out.println(Arrays.deepToString(listify("f(g(u),g(g(z)),z)")));
-		// System.out.println("=========================");
-
-		// System.out.println(isVar(listify("P(x,g(x),g(f(a)))")));
-		// System.out.println(isVar("Hello"));
-		// System.out.println(isVar("hello"));
-		// System.out.println(isVar("hellO"));
-		// System.out.println("=========================");
-		// System.out.println(isAtom(listify("P(x,g(x),g(f(a)))")));
-		// System.out.println(isAtom("Hello"));
-		// System.out.println(isAtom("hello"));
-		// System.out.println(isAtom("hellO"));
-
-		// HashMap<String, Object> map = new HashMap<String, Object>();
-		// Object o;
-		//
-		// o = listify("f(y)");
-		// map.put("x", o);
-		// o = listify("P(x,g(x),g(f(a)))");
-		// o = subst(map, o);
-		// System.out.println(Arrays.deepToString((Object[]) o));
-		// Object[] a = new Object[] { 1, 2 }, b = new Object[] { 1, 2 };
-		// System.out.println(a == b);
-		// System.out.println(a.equals(b));
-		// System.out.println(Arrays.deepEquals(a, b));
-
-		// HashMap<String, Object> map;
-		// map = getMGU("P(x,g(x),g(f(a)))", "P(f(u),v,v)");
-		// map = getMGU("P(a,y,f(y))", "P(z,z,u)");
-		// map = getMGU("f(x,g(x),x)", "f(g(u),g(g(z)),z)");
-		// if (map != null) {
-		// System.out.println(map);
-		// } else {
-		// System.out.println("fail");
-		// }
-
-		// System.out.println(arraysToString(listify("P(x,g(x),g(f(a)))")));
 	}
 }
