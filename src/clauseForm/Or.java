@@ -88,10 +88,6 @@ public class Or extends Sentence {
 	public Sentence pushNegation() {
 		Sentence[] forms = new Sentence[formulas.length];
 		for (int i = 0; i < forms.length; i++) {
-			// if (formulas[i] instanceof Not) {
-			// System.out.println(formulas[i]);
-			// System.out.println(formulas[i].pushNegation());
-			// }
 			forms[i] = formulas[i].pushNegation();
 		}
 		return new Or(forms);
@@ -143,8 +139,6 @@ public class Or extends Sentence {
 			return new And(new Sentence[] { new Or(new Sentence[] { a.distribute(), b1.distribute() }).distribute(),
 					new Or(new Sentence[] { a.distribute(), b2.distribute() }).distribute() });
 		}
-		// System.out.println(">>> Distribution Error!");
-		// return null;
 	}
 
 	@Override

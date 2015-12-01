@@ -60,9 +60,6 @@ public class And extends Sentence {
 	public Sentence pushNegation() {
 		Sentence[] forms = new Sentence[formulas.length];
 		for (int i = 0; i < forms.length; i++) {
-			// if (formulas[i] instanceof Not) {
-			// System.out.println(formulas[i].pushNegation());
-			// }
 			forms[i] = formulas[i].pushNegation();
 		}
 		return new And(forms);

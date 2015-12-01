@@ -3,8 +3,6 @@ package clauseForm;
 import java.util.HashSet;
 import java.util.Set;
 
-import parser.Parser;
-
 public class Exist extends Sentence {
 	private String[] vars;
 	private Sentence formula;
@@ -80,21 +78,6 @@ public class Exist extends Sentence {
 		return newVars;
 	}
 
-	private String[] renameVarSkolemize(String var, Set<String> skolems){
-		String[] newVars = new String[vars.length];
-		for(int i =0; i<newVars.length; i++){
-			String s = vars[i];
-			if(s.equals(var)){
-				String functionSymbol = Parser.functionSymbols.get(0);
-				Parser.functionSymbols.remove(0);
-				newVars[i] = functionSymbol + "(" + skolems.toString() + ")";
-			}else {
-				newVars[i] = s;
-			}
-		}
-		return newVars;
-	}
-	
 	@Override
 	public Sentence rename(String var, boolean toQuantifier) {
 		if (toQuantifier)
@@ -102,22 +85,21 @@ public class Exist extends Sentence {
 		String[] newVars = renameVar(var);
 		return new Exist(newVars, formula.rename(var, false));
 	}
-	
-	public Sentence renameSkolemize(String var, Set<String> skolems, boolean toQuantifier){
+
+	public Sentence renameSkolemize(String var, Set<String> skolems, boolean toQuantifier) {
 		if (toQuantifier)
 			return this;
-		String[] newVars = renameVarSkolemize(var, skolems);
-		return formula.renameSkolemize(var, skolems,  false);
+		return formula.renameSkolemize(var, skolems, false);
 	}
-	
-	public Sentence[] getFormulas(){
-		Sentence[] formulas = new Sentence[]{formula};
+
+	public Sentence[] getFormulas() {
+		Sentence[] formulas = new Sentence[] { formula };
 		return formulas;
 	}
-	
-	public Sentence skolemize(Set<String> vars){
+
+	public Sentence skolemize(Set<String> vars) {
 		formula.skolemize(vars);
-		for(String var : this.vars){
+		for (String var : this.vars) {
 			formula = formula.renameSkolemize(var, vars, false);
 		}
 		return this.formula;
