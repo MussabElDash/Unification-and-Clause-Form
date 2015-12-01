@@ -53,6 +53,9 @@ public class Not extends Sentence {
 		return formulas;
 	}
 
+	public String standardize(int cn){
+		return this.formula.standardize(cn);
+	}
 	@Override
 	public String getString() {
 		// TODO Auto-generated method stub

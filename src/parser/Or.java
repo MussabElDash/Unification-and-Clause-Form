@@ -56,6 +56,15 @@ public class Or extends Sentence {
 		}
 		return res;
 	}
+	public String standardize(int cn){
+		if (formulas.length == 0)
+			return "";
+		String res = formulas[0].standardize(cn);
+		for (int i = 1; i < formulas.length; i++) {
+			res += " , " + formulas[i].standardize(cn);
+		}
+		return res;
+	}
 
 	@Override
 	public Sentence iffElimination() {
@@ -138,53 +147,6 @@ public class Or extends Sentence {
 		// return null;
 	}
 
-	public static void main(String[] args) {
-		Sentence f = null;
-		// f = new Or(new Sentence[] { new Predicate("P(a)"),
-		// new And(new Sentence[] { new Predicate("P(b)"), new Predicate("P(c)")
-		// }) });
-
-		// f = new Or(new Sentence[] { new Predicate("P(a)"),
-		// new Or(new Sentence[] { new Predicate("P(b)"), new Predicate("P(c)")
-		// }) });
-
-		// f = new Or(new Sentence[] { new And(new Sentence[] { new
-		// Predicate("P(y)"), new Predicate("P(z)") }),
-		// new Predicate("P(x)") });
-
-		// f = new Or(new Sentence[] { new Predicate("P(x)"),
-		// new Or(new Sentence[] { new Predicate("P(y)"), new Predicate("P(z)")
-		// }) });
-
-		// f = new Or(new Sentence[] { new And(new Sentence[] { new
-		// Predicate("P(a)"), new Predicate("P(b)") }),
-		// new And(new Sentence[] { new Predicate("P(c)"), new Predicate("P(d)")
-		// }) });
-
-		// f = new Or(new Sentence[] { new Or(new Sentence[] { new
-		// Predicate("P(a)"), new Predicate("P(b)") }),
-		// new Or(new Sentence[] { new Predicate("P(c)"), new Predicate("P(d)")
-		// }) });
-
-		// f = new Or(new Sentence[] { new Or(new Sentence[] { new
-		// Predicate("P(a)"), new Predicate("P(b)") }),
-		// new And(new Sentence[] { new Predicate("P(c)"), new Predicate("P(d)")
-		// }) });
-
-		// f = new Or(new Sentence[] { new And(new Sentence[] { new
-		// Predicate("P(a)"), new Predicate("P(b)") }),
-		// new Or(new Sentence[] { new Predicate("P(c)"), new Predicate("P(d)")
-		// }) });
-
-		// f = new Or(new Sentence[] { new Predicate("P(a)"), new
-		// Predicate("P(b)") });
-
-		// f = new And(new Sentence[] { f, new Predicate("P(d)") });
-
-		f = f.distribute();
-		System.out.println(f);
-	}
-
 	@Override
 	public String getString() {
 		// TODO Auto-generated method stub
@@ -199,6 +161,6 @@ public class Or extends Sentence {
 		}
 		return new Or(forms);
 	}
-
+	
 
 }

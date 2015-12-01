@@ -9,7 +9,7 @@ import unification.Unifier;
 public class Main {
 
 	public static void main(String[] args) {
-		testUnifier(true);
+//		testUnifier(true);
 		String s = "";
 		// s = "P (x) ∧ Q(x) ∧ Q(y) ∧ R(y, x)";
 		// f = parse("∀x,y[P(x,y)]" + Formula.AND + "P(z)");
@@ -17,9 +17,9 @@ public class Main {
 //		 s = "(P(z)" + Sentence.OR + Sentence.FORALL + "x,y[P(x)])";
 //		 s = "∃x[P(x)]∧∀x[Q(x)⇒¬P(x)]"; // Corrected From Project
 //		 s = "∃x[P(x)∧∀x[Q(x)⇒¬P(x)]]"; // Project
-		 s = "∀x[P (x) ∧ (Q(x) ∧ ∃y[Q(y) ∧ R(y, x)]) ∧ ∃z[∃w[Q(w) ∧ R(z, x)]])]"; // Project
-//		 s = "∀x[P (x) ⇔ (Q(x) ∧ ∃y[Q(y) ∧ R(y, x)])] ∧ ∃z[P(z) ∧ ∀x[Q(x) ∧ ∃y[Q(y) ∧ R(y, x)]]]";
-//		 s = "∀x[Q(x) ∧ ∃y[Q(y) ∧ R(y, x)]] ∧ ∃z[P(z) ∧ ∀x[Q(x) ∧ ∃y[Q(y) ∧ R(y, x)]]";
+//		 s = "∀x[P (x) ∧ (Q(x) ∧ ∃y[Q(y) ∧ R(y, x)]) ∧ ∃z[∃w[Q(w) ∧ R(z, x)]])]"; // Project
+//		 s = "∀x[P (x) ⇔ (Q(x) ∧ ∃y[Q(y) ∧ R(y, x)])]";
+//		 s = "∀x[Q(x) ∧ ∃y[Q(y) ∧ R(y, x)]] ⇒ ∃z[P(z) ∧ ∀x[Q(x) ∧ ∃y[Q(y) ∧ R(y, x)]]";
 		
 		ClauseForm(s, true);
 	}
@@ -85,6 +85,7 @@ public class Main {
 			clauseFormI = clauseFormI.substring(2, clauseFormI.length() - 2);
 			clauseFormI = "{" + clauseFormI + "}";
 			System.out.println(clauseFormI);
+			
 
 		} else {
 			f = Parser.parse(sentence);
@@ -102,6 +103,15 @@ public class Main {
 		clauseFormII = clauseFormII.substring(0, clauseFormII.length() - 2);
 		clauseFormII = "{" + clauseFormII + "}";
 		System.out.println(clauseFormII);
+		
+		System.out.println("\nClause-Form III");
+		System.out.println("==========================");
+		String ClauseFormIII= f.toClauseFormIII();
+//		String clauseFormIII = f.toClauseFormII();
+		ClauseFormIII = ClauseFormIII.substring(0, ClauseFormIII.length()-2);
+		ClauseFormIII = "{" + ClauseFormIII + "}";
+		System.out.println(ClauseFormIII);
+		
 
 	}
 
@@ -117,9 +127,9 @@ public class Main {
 	private static void testUnifier(boolean trace) {
 		Unifier.setTrace(trace);
 		HashMap<String, String> map;
-		map = Unifier.getMGU("P(x,g(x),g(f(A)))", "P(f(u),v,v)");
+		map = Unifier.getMGU("P(x,g(x),g(f(a)))", "P(f(u),v,v)");
 		check(map);
-		map = Unifier.getMGU("P(A,y,f(y))", "P(z,z,u)");
+		map = Unifier.getMGU("P(a,y,f(y))", "P(z,z,u)");
 		check(map);
 		map = Unifier.getMGU("f(x,g(x),x)", "f(g(u),g(g(z)),z)");
 		check(map);

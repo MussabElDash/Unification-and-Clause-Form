@@ -5,7 +5,8 @@ import java.util.HashSet;
 import java.util.Set;
 
 public class Predicate extends Sentence {
-	private String string;
+	public String string;
+	public boolean visited = false;
 
 	public Predicate(String s) {
 		string = s;
@@ -170,6 +171,27 @@ public class Predicate extends Sentence {
 		String replacable = (skolems.size() == 0)? var.toUpperCase() : toFunction(var, skolems);
 		s = s.replaceAll(var , replacable);
 		return new Predicate(s);
+	}
+	
+	public String standardize(int sc){
+		this.visited = true;
+		String s = string;
+		String init = s.substring(0,2);
+		s = s.substring(2, s.length()-1);
+		String[] ss = s.split(",");
+		s = "";
+		for(int i=0; i<ss.length; i++){
+			String ssi = ss[i];
+			if(ssi.charAt(ssi.length()-1) == ')'){
+				ssi = ssi.substring(0, ssi.length()-1);
+				ssi += sc + ")";
+			}else{
+				ssi += sc;
+			}
+			s += ssi + ", ";
+		}
+		s = init + s.substring(0, s.length()-2) + ")";
+		return s;
 	}
 
 }

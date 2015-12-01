@@ -63,9 +63,9 @@ public abstract class Sentence {
 
 	public static String toFunction(String var, Set<String> skolems) {
 		String functionSymbol;
-		if (Parser.varTosym.containsKey(var)){
+		if (Parser.varTosym.containsKey(var)) {
 			functionSymbol = Parser.varTosym.get(var);
-		}else{
+		} else {
 			functionSymbol = Parser.functionSymbols.get(0);
 			Parser.functionSymbols.remove(0);
 			Parser.varTosym.put(var, functionSymbol);
@@ -94,7 +94,25 @@ public abstract class Sentence {
 		}
 		return cnf;
 	}
-	
+
+	public String toClauseFormIII() {
+		String cn3 = "";
+		Sentence[] formulas = this.getFormulas();
+		for (int i = 0; i < formulas.length; i++) {
+			if (formulas[i].getClass() == And.class) {
+				cn3 += formulas[i].toClauseFormIII();
+			} else {
+				cn3 += "{" + formulas[i].standardize(Parser.StandardizationCounter) + "},\n";
+				Parser.StandardizationCounter += 1;
+			}
+		}
+		return cn3;
+	}
+
+	public String standardize(int sc) {
+		return this.toString();
+	}
+
 	public String toClauseFormI() {
 		String clauseFormI = "";
 		Sentence[] formulas = this.getFormulas();
@@ -128,8 +146,8 @@ public abstract class Sentence {
 	public String toStringClauseForm() {
 		return this.toString();
 	}
-	
-	public String toStringCNF(){
+
+	public String toStringCNF() {
 		return this.toString();
 	}
 }
