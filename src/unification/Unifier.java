@@ -6,6 +6,12 @@ import java.util.HashMap;
 import parser.Predicate;
 
 public class Unifier {
+	private static boolean trace;
+
+	public static void setTrace(boolean t) {
+		trace = t;
+	}
+
 	public static HashMap<String, String> getMGU(String a, String b) {
 		Object o1 = Predicate.listify(a);
 		Object o2 = Predicate.listify(b);
@@ -34,6 +40,8 @@ public class Unifier {
 		Object[] arr2 = (Object[]) o2;
 		if (arr1.length != arr2.length)
 			return null;
+		if (trace)
+			System.out.println("Unifying: " + Arrays.deepToString(arr1) + "\twith\t" + Arrays.deepToString(arr2));
 		return getMGU(Predicate.rest(arr1), Predicate.rest(arr2),
 				getMGU(Predicate.first(arr1), Predicate.first(arr2), map));
 	}

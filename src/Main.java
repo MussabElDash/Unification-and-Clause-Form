@@ -9,7 +9,7 @@ import unification.Unifier;
 public class Main {
 
 	public static void main(String[] args) {
-		
+		testUnifier(true);
 		String s = "";
 		// s = "P (x) ∧ Q(x) ∧ Q(y) ∧ R(y, x)";
 		// f = parse("∀x,y[P(x,y)]" + Formula.AND + "P(z)");
@@ -22,19 +22,11 @@ public class Main {
 //		 s = "∀x[Q(x) ∧ ∃y[Q(y) ∧ R(y, x)]] ∧ ∃z[P(z) ∧ ∀x[Q(x) ∧ ∃y[Q(y) ∧ R(y, x)]]";
 		
 		ClauseForm(s, true);
-
-		//		HashMap<String, String> map;
-//		map = Unifier.getMGU("P(x,g(x),g(f(a)))", "P(f(u),v,v)");
-//		check(map);
-//		map = Unifier.getMGU("P(a,y,f(y))", "P(z,z,u)");
-//		check(map);
-//		map = Unifier.getMGU("f(x,g(x),x)", "f(g(u),g(g(z)),z)");
-//		check(map);
 	}
 
-	public static void ClauseForm(String sentence, boolean traceMode){
+	public static void ClauseForm(String sentence, boolean traceMode) {
 		Sentence f = null;
-		if(traceMode){
+		if (traceMode) {
 			System.out.println("Original String");
 			System.out.println(sentence);
 			System.out.println("=========================");
@@ -62,39 +54,39 @@ public class Main {
 			f.standardize(new HashSet<String>());
 			System.out.println("Standardized");
 			System.out.println(f);
-			System.out.println("=========================");	
-			
+			System.out.println("=========================");
+
 			f = f.skolemize(new HashSet<String>());
 			System.out.println("Skolemized");
 			System.out.println(f);
 			System.out.println("=========================");
-			
+
 			f = f.discardForAll();
 			System.out.println("Dsicarded For All");
 			System.out.println(f);
 			System.out.println("==========================");
-			
+
 			f = f.distribute();
 			System.out.println("Distributed");
 			System.out.println(f);
 			System.out.println("==========================");
-//			System.out.println(f.getClass());
-			
+			// System.out.println(f.getClass());
+
 			System.out.println("\nCNF");
 			System.out.println("==========================");
 			String cnf = f.toCNF();
-			cnf = cnf.substring(2, cnf.length()-2);
+			cnf = cnf.substring(2, cnf.length() - 2);
 			cnf = "(" + cnf + ")";
 			System.out.println(cnf);
 
 			System.out.println("\nClause-Form I");
 			System.out.println("==========================");
 			String clauseFormI = f.toClauseFormI();
-			clauseFormI = clauseFormI.substring(2, clauseFormI.length()-2);
+			clauseFormI = clauseFormI.substring(2, clauseFormI.length() - 2);
 			clauseFormI = "{" + clauseFormI + "}";
 			System.out.println(clauseFormI);
 
-		}else{
+		} else {
 			f = Parser.parse(sentence);
 			f = f.iffElimination();
 			f = f.impElimination();
@@ -107,19 +99,30 @@ public class Main {
 		System.out.println("\nClause-Form II");
 		System.out.println("==========================");
 		String clauseFormII = f.toClauseFormII();
-		clauseFormII = clauseFormII.substring(0, clauseFormII.length()-2);
+		clauseFormII = clauseFormII.substring(0, clauseFormII.length() - 2);
 		clauseFormII = "{" + clauseFormII + "}";
 		System.out.println(clauseFormII);
 
 	}
-	
+
 	public static void check(HashMap<String, String> map) {
-		System.out.println("========================================");
 		if (map != null) {
 			System.out.println(map);
 		} else {
 			System.out.println("fail");
 		}
+		System.out.println("========================================");
+	}
+
+	private static void testUnifier(boolean trace) {
+		Unifier.setTrace(trace);
+		HashMap<String, String> map;
+		map = Unifier.getMGU("P(x,g(x),g(f(A)))", "P(f(u),v,v)");
+		check(map);
+		map = Unifier.getMGU("P(A,y,f(y))", "P(z,z,u)");
+		check(map);
+		map = Unifier.getMGU("f(x,g(x),x)", "f(g(u),g(g(z)),z)");
+		check(map);
 	}
 
 }
