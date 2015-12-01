@@ -24,9 +24,9 @@ public class Main {
 		//Choose the String of FOL to operate on.
 		String s = "";
 //		 s = "P (x) ∧ Q(x) ∧ Q(y) ∧ R(y, x)";
-//		 s = "∃x[P(x)]∧∀x[Q(x)⇒¬P(x)]"; // Project
+		 s = "∃x[P(x)]∧∀x[Q(x)⇒¬P(x)]"; // Project
 //		 s = "∀x[P (x) ∧ (Q(x) ∧ ∃y[Q(y) ∧ R(y, x)]) ∧ ∃z[∃w[Q(w) ∧ R(z,// x)]])]"; // Project
-		 s = "∀x[P (x) ⇔ (Q(x) ∧ ∃y[Q(y) ∧ R(y, x)])]";
+//		 s = "∀x[P (x) ⇔ (Q(x) ∧ ∃y[Q(y) ∧ R(y, x)])]";
 //		 s = "∀x[Q(x) ∧ ∃y[Q(y) ∧ R(y, x)]] ⇒ ∃z[P(z) ∧ ∀x[Q(x) ∧ ∃y[Q(y) ∧R(y, x)]]";
 
 		ClauseForm(s, traceMode);
