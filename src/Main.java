@@ -13,16 +13,14 @@ public class Main {
 		String s = "";
 		// s = "P (x) ∧ Q(x) ∧ Q(y) ∧ R(y, x)";
 		// f = parse("∀x,y[P(x,y)]" + Formula.AND + "P(z)");
-		// s = Sentence.EXIST + "x, y[P(x, y)]" + Sentence.IMPLIES + "¬(P(z)" +
-		// Sentence.OR + Sentence.FORALL + "x,y[P(x,y)∧P(y)])";
-		// s = "(P(z)" + Sentence.OR + Sentence.FORALL + "x,y[P(x)])";
-		// s = "∃x[P(x)]∧∀x[Q(x)⇒¬P(x)]"; // Corrected From Project
-		// s = "∃x[P(x)∧∀x[Q(x)⇒¬P(x)]]"; // Project
-		// s = "∀x[P (x) ∧ (Q(x) ∧ ∃y[Q(y) ∧ R(y, x)])]"; // Project
-		s = "∀x[P (x) ⇔ (Q(x) ∧ ∃y[Q(y) ∧ R(y, x)])] ∧ ∃z[P(z) ∧ ∀x[Q(x) ∧ ∃y[Q(y) ∧ R(y, x)]]]";
-		// s = "∀x[Q(x) ∧ ∃y[Q(y) ∧ R(y, x)]] ∧ ∃z[P(z) ∧ ∀x[Q(x) ∧ ∃y[Q(y) ∧
-		// R(y, x)]]";
-
+//		s = Sentence.EXIST + "x, y[P(x, y)]" + Sentence.IMPLIES + "¬(P(z)" + Sentence.OR + Sentence.FORALL + "x,y[P(x,y)∧P(y)])";
+//		 s = "(P(z)" + Sentence.OR + Sentence.FORALL + "x,y[P(x)])";
+//		 s = "∃x[P(x)]∧∀x[Q(x)⇒¬P(x)]"; // Corrected From Project
+//		 s = "∃x[P(x)∧∀x[Q(x)⇒¬P(x)]]"; // Project
+		 s = "∀x[P (x) ∧ (Q(x) ∧ ∃y[Q(y) ∧ R(y, x)]) ∧ ∃z[∃w[Q(w) ∧ R(z, x)]])]"; // Project
+//		 s = "∀x[P (x) ⇔ (Q(x) ∧ ∃y[Q(y) ∧ R(y, x)])] ∧ ∃z[P(z) ∧ ∀x[Q(x) ∧ ∃y[Q(y) ∧ R(y, x)]]]";
+//		 s = "∀x[Q(x) ∧ ∃y[Q(y) ∧ R(y, x)]] ∧ ∃z[P(z) ∧ ∀x[Q(x) ∧ ∃y[Q(y) ∧ R(y, x)]]";
+		
 		ClauseForm(s, true);
 	}
 
