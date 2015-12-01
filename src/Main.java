@@ -9,7 +9,7 @@ import unification.Unifier;
 public class Main {
 
 	public static void main(String[] args) {
-		testUnifier(true);
+		// testUnifier(true);
 		String s = "";
 		// s = "P (x) ∧ Q(x) ∧ Q(y) ∧ R(y, x)";
 		// f = parse("∀x,y[P(x,y)]" + Formula.AND + "P(z)");
@@ -100,6 +100,7 @@ public class Main {
 		}
 		System.out.println("\nClause-Form II");
 		System.out.println("==========================");
+		System.out.println("printing " + f);
 		String clauseFormII = f.toClauseFormII();
 		clauseFormII = clauseFormII.substring(0, clauseFormII.length() - 2);
 		clauseFormII = "{" + clauseFormII + "}";
